@@ -1,0 +1,231 @@
+.comic {
+  margin: 1em;
+  border: 2px solid #000;
+  display: block;
+  overflow: hidden;
+  float: left;
+  font-family: 'Source Sans Pro', 'Liberation sans', Arial, sans-serif
+}
+
+.title {
+  display: block;
+  border-bottom: 2px solid #000;
+  background-color: #eee;
+  padding: .25em 1em
+}
+
+.title h1,
+.title h2 {
+  display: inline-block;
+  margin: 0;
+  letter-spacing: -.05em;
+  font-family: 'Source Sans Pro', 'Liberation sans', Arial, sans-serif
+}
+
+.title h2 {
+  margin-left: .5em;
+  color: #787878;
+  font-weight: 400;
+  letter-spacing: -.025em
+}
+
+.strip {
+  overflow: hidden
+}
+
+.strip section {
+  background-color: #eee;
+  position: relative;
+  float: left;
+  width: 20em;
+  height: 20em;
+  border: 1px solid #000;
+  margin: 1em
+}
+
+.strip section header {
+  display: block;
+  border: 1px solid #000;
+  position: absolute;
+  left: -.3em;
+  top: -.3em;
+  max-width: 20em;
+  background: #fff;
+  padding: .25em .5em;
+  box-shadow: .1em .1em .1em rgba(0, 0, 0, .5);
+  font-style: italic;
+  font-weight: 600;
+  z-index: 10
+}
+
+.strip section img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2
+}
+
+.strip section+section {
+  margin-left: 0
+}
+
+.left-python-yellow:before,
+.right-python-yellow:after {
+  background: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2273%22%20height%3D%22126%22%20viewBox%3D%220%200%2073%20126%22%20version%3D%221.1%22%3E%3Ctitle%3EPython%3C/title%3E%3Cg%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20transform%3D%22translate%280.000000%2C%201.000000%29%22%20stroke%3D%22%23000000%22%3E%3Cpath%20id%3D%22snake%22%20d%3D%22M0.6%20123.7L4.3%2014.9C4.3%2014.9%204.3%200.3%2024.8%200.3%2045.3%200.3%2055.7%200.3%2055.7%200.3%2055.7%200.3%2072.2%200.3%2072.2%2014.9%2072.2%2029.6%2072.2%2032.6%2072.2%2032.6L24.8%2032.6%2030.1%20123.7%200.6%20123.7Z%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20fill%3D%22%23FFD631%22/%3E%3Ccircle%20id%3D%22eye%22%20fill%3D%22%23FFFFFF%22%20cx%3D%2255.5%22%20cy%3D%2215.5%22%20r%3D%227.5%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')bottom left no-repeat;
+  background-size: 100%
+}
+
+.left-python-blue:before,
+.right-python-blue:after {
+  background: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2273%22%20height%3D%22126%22%20viewBox%3D%220%200%2073%20126%22%20version%3D%221.1%22%3E%3Ctitle%3EPython%3C/title%3E%3Cg%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20transform%3D%22translate%280.000000%2C%201.000000%29%22%20stroke%3D%22%23000000%22%3E%3Cpath%20id%3D%22snake%22%20d%3D%22M0.6%20123.7L4.3%2014.9C4.3%2014.9%204.3%200.3%2024.8%200.3%2045.3%200.3%2055.7%200.3%2055.7%200.3%2055.7%200.3%2072.2%200.3%2072.2%2014.9%2072.2%2029.6%2072.2%2032.6%2072.2%2032.6L24.8%2032.6%2030.1%20123.7%200.6%20123.7Z%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20fill%3D%22%23336D9F%22/%3E%3Ccircle%20id%3D%22eye%22%20fill%3D%22%23FFFFFF%22%20cx%3D%2255.5%22%20cy%3D%2215.5%22%20r%3D%227.5%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')bottom left no-repeat;
+  background-size: 100%
+}
+
+.left-python-blue:before,
+.left-python-yellow:before {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 33%;
+  height: 0;
+  padding-bottom: 57%;
+  left: .5em;
+  background-size: 100%;
+  bottom: -.1em;
+  z-index: 3
+}
+
+.left-python-blue:before #snake,
+.left-python-yellow:before #snake {
+  background: red!important
+}
+
+.right-python-blue:after,
+.right-python-yellow:after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 33%;
+  height: 0;
+  padding-bottom: 57%;
+  bottom: -.1em;
+  background-size: 100%;
+  -webkit-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  transform: scaleX(-1);
+  right: .5em;
+  z-index: 3
+}
+
+.right-python-blue:after #snake,
+.right-python-yellow:after #snake {
+  background: red!important
+}
+
+.bubble-bottom,
+.bubble-top {
+  display: block;
+  position: absolute;
+  background-color: #fff;
+  border-radius: 1em;
+  margin: 0;
+  padding: .25em 1em;
+  left: .3em;
+  max-width: 17.2em;
+  min-width: 5em;
+  z-index: 5;
+  border: 1px solid #000;
+  box-shadow: .1em .1em .1em rgba(0, 0, 0, .2);
+  font-family: 'Source Sans Pro', 'Liberation sans', Arial, sans-serif
+}
+
+.bubble-bottom p,
+.bubble-top p {
+  margin: 0
+}
+
+.bubble-bottom p+p,
+.bubble-top p+p {
+  margin-top: .25em
+}
+
+.bubble-bottom:after,
+.bubble-bottom:before,
+.bubble-top:after,
+.bubble-top:before {
+  display: block;
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: -1em;
+  left: 4.5em;
+  border-style: solid;
+  border-width: 1em .5em 0 .5em;
+  border-color: #fff transparent transparent transparent;
+  z-index: 7
+}
+
+.bubble-bottom:after,
+.bubble-top:after {
+  z-index: 6;
+  bottom: -1.1em;
+  margin-left: -.05em;
+  border-width: 1.1em .6em 0 .6em;
+  border-color: #000 transparent transparent transparent
+}
+
+.bubble-bottom.right:after,
+.bubble-bottom.right:before,
+.bubble-top.right:after,
+.bubble-top.right:before {
+  left: auto;
+  right: 4.5em
+}
+
+.bubble-bottom.right,
+.bubble-top.right {
+  left: auto;
+  right: 0.3em;
+}
+
+.bubble-bottom.right:after,
+.bubble-top.right:after {
+  margin-right: -.05em;
+  margin-left: auto
+}
+
+.bubble-top {
+  bottom: 12.75em
+}
+
+.bubble-bottom {
+  bottom: auto;
+  top: 13.75em
+}
+
+.bubble-bottom:after,
+.bubble-bottom:before {
+  bottom: auto;
+  top: -1em;
+  border-width: 0 .5em 1em .5em;
+  border-color: transparent transparent #fff transparent
+}
+
+.bubble-bottom:after {
+  top: -1.1em;
+  border-width: 0 .6em 1.1em .6em;
+  border-color: transparent transparent #000 transparent
+}
+
+.smallprint {
+  font-size: 60%;
+  color: #666;
+  float: right;
+  margin-top: -2em;
+  margin-right: 2em
+}
