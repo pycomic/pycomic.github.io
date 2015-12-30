@@ -22,3 +22,11 @@ This is a static website (i.e. there is no backend). Users use some simple
 JavaScript to appropriately manipulate the DOM to create their comic. If
 there's a correctly configured query string in the URL we'll use that to define
 the comic - allowing people to share their work via links.
+
+Help?
+-----
+
+Will be forthcoming, but essentially, this excellent article explains what we
+hope you'll be able to create with this "service":
+
+https://timstout.wordpress.com/2011/09/03/how-to-use-3-act-story-structure-in-comic-strips/
