@@ -238,7 +238,7 @@
   left: 50%;
   margin-left: -200px;
   margin-top: -150px;
-  width:400px;
+  width: 400px;
   height: 300px;
   svg {
     display: block;
@@ -247,17 +247,54 @@
   }
 }
 
-@keyframes fading {
-    0%   { fill: #333; }
-    33%  { fill: red; }
-    66%  { fill: red; }
-    100% { fill: #333; }
+@keyframes rainbow {
+0% {fill: #ff0000;}
+10% {fill: #ff8000;}
+20% {fill: #ffff00;}
+30% {fill: #80ff00;}
+40% {fill: #00ff00;}
+50% {fill: #00ff80;}
+60% {fill: #00ffff;}
+70% {fill: #0080ff;}
+80% {fill: #0000ff;}
+90% {fill: #8000ff;}
+100% {fill: #ff0080;}
 }
 
-.microbit-svg #Rectangle-5-Copy-17 {
-  animation: fading 1s infinite;
+@keyframes fading {
+  0% {
+    fill: #333;
+  }
+  33% {
+    fill: red;
+  }
+  66% {
+    fill: red;
+  }
+  100% {
+    fill: #333;
+  }
 }
+
+.on-1,.on-2,.on-3,.on-4,.on-5,.on-6,.on-7,.on-8,.on-9,.on { fill: red; }
+.on-1 { opacity: 0.1; }
+.on-2 { opacity: 0.2; }
+.on-3 { opacity: 0.3; }
+.on-4 { opacity: 0.4; }
+.on-5 { opacity: 0.5; }
+.on-6 { opacity: 0.6; }
+.on-7 { opacity: 0.7; }
+.on-8 { opacity: 0.8; }
+.on-9 { opacity: 0.9; }
+.on-10 { opacity: 0.9; }
+
+.on-1 { fill: #333; opacity: 1; }
+
+
+.blink { animation: linear 1s fading infinite; }
+
+//.microbit-svg #led-4-4 { .blink }
 
 .microbit-svg .flavour {
-  fill: #FF0;
+  animation: linear 5s rainbow infinite;
 }
