@@ -2,11 +2,43 @@
 <html lang="en">
     <head>
         <title>Python Comic- BBC micro:bit</title>
-        <link rel="stylesheet" href="style.css"/>A
+        <link rel="stylesheet" href="style.css"/>
         <script src="jquery-2.1.4.min.js"></script>
         <script src="microbit.js"></script>
+        <script src="images.js"></script>
+        <script src="font.js"></script>
     </head>
     <body>
+    <div class="controls">
+        <label for="flavour">Flavour</label>
+        <select id="flavour" name="flavour">
+            <option value="banana">Banana</option>
+            <option value="strawberry">Strawberry</option>
+            <option value="orange">Orange</option>
+            <option value="lime">Lime</option>
+            <option value="mint">Mint</option>
+            <option value="peppermint">Peppermint</option>
+            <option value="ice">Ice</option>
+            <option value="stilton">Stilton</option>
+            <option value="blueberry">Blueberry</option>
+            <option value="woad">Woad</option>
+            <option value="lychee">Lychee</option>
+            <option value="milk">Milk</option>
+            <option value="truffle">Truffle</option>
+            <option value="chocolate">Chocolate</option>
+        </select>
+        <label for="pin-0">Crocodile Clips</label>
+        <input type="checkbox" name="pin-0" id='p0-state'>0</input>
+        <input type="checkbox" name="pin-1" id='p1-state'>1</input>
+        <input type="checkbox" name="pin-2" id='p2-state'>2</input>
+        <input type="checkbox" name="pin-3v" id='3v-state'>3V</input>
+        <input type="checkbox" name="pin-gnd" id='gnd-state'>GND</input>
+        <label for="images">Images</label>
+        <select id="images" name="images"></select>
+        <label for="scroll">Scroll Message</label>
+        <input type="text" id="scroll" name="scroll"/>
+        <button id="start_scroll">GO</button>
+    </div>
 <div class="microbit-svg">
 
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1298 1055" version="1.1">
@@ -120,6 +152,9 @@
             <text id="4" font-size="48" font-weight="normal">
               <tspan x="750" y="47" fill="#FFFFFF">4</tspan>
             </text>
+            <text id="X" font-size="48" font-weight="normal">
+              <tspan x="750" y="-10" fill="#FFFFFF">X</tspan>
+            </text>
             <text id="1" font-size="48" font-weight="normal">
               <tspan x="277" y="219" fill="#FFFFFF">1</tspan>
             </text>
@@ -131,6 +166,9 @@
             </text>
             <text id="4" font-size="48" font-weight="normal">
               <tspan x="277" y="523" fill="#FFFFFF">4</tspan>
+            </text>
+            <text id="Y" font-size="48" font-weight="normal">
+              <tspan x="237" y="523" fill="#FFFFFF">Y</tspan>
             </text>
           </g>
         </g>
@@ -171,7 +209,13 @@
       </g>
     </g>
   </svg>
-
+  
+  <div class="crocodile pin-0"></div>
+  <div class="crocodile pin-1"></div>
+  <div class="crocodile pin-2"></div>
+  <div class="crocodile pin-3v"></div>
+  <div class="crocodile pin-gnd"></div>
+  
 </div>
     </body>
 </html>

@@ -1,3 +1,14 @@
+.controls label {
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+.controls {
+    font-family: HelveticaNeue, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding-bottom: 8px;
+    border-bottom: 1px #CCC solid;
+}
+
 .comic {
   margin: 1em;
   border: 2px solid #000;
@@ -247,54 +258,93 @@
   }
 }
 
-@keyframes rainbow {
-0% {fill: #ff0000;}
-10% {fill: #ff8000;}
-20% {fill: #ffff00;}
-30% {fill: #80ff00;}
-40% {fill: #00ff00;}
-50% {fill: #00ff80;}
-60% {fill: #00ffff;}
-70% {fill: #0080ff;}
-80% {fill: #0000ff;}
-90% {fill: #8000ff;}
-100% {fill: #ff0080;}
-}
-
-@keyframes fading {
-  0% {
-    fill: #333;
-  }
-  33% {
-    fill: red;
-  }
-  66% {
-    fill: red;
-  }
-  100% {
-    fill: #333;
-  }
-}
+.strawberry {fill: #ff0000;}
+.orange {fill: #ff8000;}
+.banana {fill: #ffff00;}
+.lime {fill: #80ff00;}
+.mint {fill: #00ff00;}
+.peppermint {fill: #00ff80;}
+.ice {fill: #00ffff;}
+.stilton {fill: #0080ff;}
+.blueberry {fill: #0000ff;}
+.woad {fill: #8000ff;}
+.lychee {fill: #ff0080;}
+.milk {fill: #cccccc;}
+.truffle {fill: #222222;}
+.chocolate {fill: #8b4513;}
 
 .on-1,.on-2,.on-3,.on-4,.on-5,.on-6,.on-7,.on-8,.on-9,.on { fill: red; }
-.on-1 { opacity: 0.1; }
-.on-2 { opacity: 0.2; }
-.on-3 { opacity: 0.3; }
-.on-4 { opacity: 0.4; }
-.on-5 { opacity: 0.5; }
-.on-6 { opacity: 0.6; }
-.on-7 { opacity: 0.7; }
-.on-8 { opacity: 0.8; }
-.on-9 { opacity: 0.9; }
-.on-10 { opacity: 0.9; }
+.on-1 { opacity: 0.2; }
+.on-2 { opacity: 0.3; }
+.on-3 { opacity: 0.4; }
+.on-4 { opacity: 0.5; }
+.on-5 { opacity: 0.6; }
+.on-6 { opacity: 0.7; }
+.on-7 { opacity: 0.8; }
+.on-8 { opacity: 0.9; }
+.on-9 { opacity: 1; }
 
-.on-1 { fill: #333; opacity: 1; }
+.microbit-svg .crocodile {
+  display: block;
+  width: 1em;
+  height: 2.1em;
+  background: #ccc;
+  position: absolute;
+  border-radius: 1em 1em 0 0 ;
+  z-index: 2;
+  box-shadow: 0 -0.05em 0.1em black;
+}
+.microbit-svg .crocodile:before,
+.microbit-svg .crocodile:after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 1em;
+  height: 1em;
+  background: #ccc;
+  margin-top: -0.5em;
+  border-radius: 1em;
+  z-index: 3;
+}
+.microbit-svg .crocodile:before {
+  left: 0.36em;
+  top: 3em;
+  width: 0.3em;
+  height: 10em;
+  background: red;
+  z-index: 1;
+}
+.microbit-svg .crocodile:after {
+  top: 2.5em;
+  left: -1em;
+  width: 3em;
+  height: 5em;
+  border-radius: 3em 3em 5em 5em;
+  background: red;
+  z-index: 2;
+}
+.microbit-svg .crocodile.pin-0,
+.microbit-svg .crocodile.pin-1,
+.microbit-svg .crocodile.pin-2,
+.microbit-svg .crocodile.pin-3v,
+.microbit-svg .crocodile.pin-gnd {
+  left: 1.6em;
+  bottom: -3.1em;
+  display: none;
+}
+.microbit-svg .crocodile.pin-1 {
+  left: 6.4em;
+}
+.microbit-svg .crocodile.pin-2 {
+  left: 11.9em;
+}
+.microbit-svg .crocodile.pin-3v {
+  left: 17.4em;
+}
+.microbit-svg .crocodile.pin-gnd {
+  left: 22.4em;
+}
 
-
-.blink { animation: linear 1s fading infinite; }
-
-//.microbit-svg #led-4-4 { .blink }
-
-.microbit-svg .flavour {
-  animation: linear 5s rainbow infinite;
+#button-b:active, #button-a:active {
+  fill: #222;
 }
