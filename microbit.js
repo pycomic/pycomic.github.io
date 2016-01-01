@@ -108,8 +108,10 @@ function scroll_text(text, interval) {
     }
 }
 
-// Run on start-up
-$(document).ready(function() {
+// Add various UI controls for updating the output of the device.
+function setup_editor() {
+    // Show the controls.
+    $('.controls').show();
     // Set up the colour scheme for the device.
     set_flavour('banana');
     $('#flavour').change(function() {
@@ -155,4 +157,57 @@ $(document).ready(function() {
             alert("You must enter some text!");
         }
     });
+}
+
+// Use arguments from the query string to setup the device to behave in certain
+// ways.
+function setup_from_url() {
+    var flavour = get_qs_value("flavour");
+    var p0 = get_qs_value("p0");
+    var p1 = get_qs_value("p1");
+    var p2 = get_qs_value("p2");
+    var p3v = get_qs_value("3v");
+    var pgnd = get_qs_value("gnd");
+    var image = get_qs_value("image");
+    var message = decodeURIComponent(get_qs_value("scroll"));
+    if(flavour) {
+        set_flavour(flavour);
+    }
+    if(p0) {
+        crocodile('pin-0', true);
+    }
+    if(p1) {
+        crocodile('pin-1', true);
+    }
+    if(p2) {
+        crocodile('pin-2', true);
+    }
+    if(p3v) {
+        crocodile('pin-3v', true);
+    }
+    if(pgnd) {
+        crocodile('pin-gnd', true);
+    }
+    if(image) {
+        if(images[image]) {
+            show(images[image]);
+        } else {
+            show(font[image])
+        }
+    } else if(message) {
+        scroll_text(message)
+    }
+}
+
+// Run on start-up
+$(document).ready(function() {
+    var querystring = window.location.search.substring(1);
+    // If there's something in the URL's querystring, use it to display the
+    // device as specified therein.
+    if(querystring) {
+        setup_from_url();
+    } else {
+        // Otherwise, show some UI to allow people to edit their own settings.
+        setup_editor();
+    };
 });
