@@ -3,6 +3,19 @@
     margin-left: 8px;
 }
 
+.controls form {
+    display: inline;
+}
+
+.controls a, .controls a:visited {
+    color: #0000FF;
+    text-decoration: none;
+}
+
+.controls a:hover, .controls a:active {
+    text-decoration: underline;
+}
+
 .controls {
     font-family: HelveticaNeue, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     padding-bottom: 8px;

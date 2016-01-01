@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Python Comic- BBC micro:bit</title>
+        <title>Here's a BBC micro:bit-o-matic!</title>
         <link rel="stylesheet" href="style.css"/>
         <script src="jquery-2.1.4.min.js"></script>
         <script src="qs-tools.js"></script>
@@ -11,6 +11,8 @@
     </head>
     <body>
     <div class="controls">
+        <form id="control-form">
+        <button type="reset" id="reset">Reset</button>
         <label for="flavour">Flavour</label>
         <select id="flavour" name="flavour">
             <option value="banana">Banana</option>
@@ -38,7 +40,9 @@
         <select id="images" name="images"></select>
         <label for="scroll">Scroll Message</label>
         <input type="text" id="scroll" name="scroll"/>
+        </form>
         <button id="start_scroll">GO</button>
+        <a href="http://pycomic.github.io/microbit.html" id="direct-link" target="_new">Direct Link</a>
     </div>
 <div class="microbit-svg">
 

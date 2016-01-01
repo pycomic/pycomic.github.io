@@ -10,3 +10,17 @@ function get_qs_value(key) {
     }
 }
 
+// Given a settings object of key/value pairs, will update the query string
+// element of the URL accordingly.
+function set_qs(settings) {
+    var qs_array = [];
+    var keys = Object.keys(settings);
+    for(i=0; i<keys.length; i++) {
+        var key = keys[i];
+        var value = settings[key];
+        qs_array.push(key + '=' + encodeURIComponent(value));
+    }
+    var old_url = window.location.href.split('?');
+    var new_url = old_url[0] + '?' + qs_array.join('&');
+    $('#direct-link').attr('href', new_url);
+}

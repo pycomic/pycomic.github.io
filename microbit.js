@@ -5,6 +5,9 @@ Array.prototype.extend = function (other_array) {
 // Used to hold timeouts used in scrolling effect.
 var TIMEOUTS = [];
 
+// Used to store global state for building the query string.
+var QS = [];
+
 // Twinkle some LEDs
 function twinkle() {
     var led1 = 'led-' + Math.floor(Math.random() * 5).toString() +
@@ -48,16 +51,21 @@ function show(image, greyscale) {
 // pre-defined named flavour (see the style.css file).
 function set_flavour(flavour) {
     $('.microbit-svg .flavour').attr('class', 'flavour ' + flavour)
+    QS['flavour'] = flavour;
+    set_qs(QS);
 }
 
 // Set if a crocodile clip is to be connected to the referenced pin.
-function crocodile(pin, connected) {
-    var pin = $('.' + pin);
+function crocodile(pin_name, connected) {
+    var pin = $('.' + pin_name);
     if(connected) {
         pin.show();
+        QS[pin_name] = 1;
     } else {
         pin.hide();
+        delete QS[pin_name];
     }
+    set_qs(QS);
 }
 
 // Given some text, will scroll it across the LED matrix of the micro:bit. The
@@ -104,7 +112,6 @@ function scroll_text(text, interval) {
         left++;
         right++;
         when+=interval;
-        console.log(when);
     }
 }
 
@@ -112,6 +119,10 @@ function scroll_text(text, interval) {
 function setup_editor() {
     // Show the controls.
     $('.controls').show();
+    // Ensure the form never submits.
+    $('#control-form').submit(function(e) {
+        return false;
+    });
     // Set up the colour scheme for the device.
     set_flavour('banana');
     $('#flavour').change(function() {
@@ -137,6 +148,13 @@ function setup_editor() {
         var image = $(this).find("option:selected").attr('value');
         if(images[image]) {
             show(images[image]);
+            if(image == 'clear') {
+                delete QS['image'];
+            } else {
+                QS['image'] = image;
+                delete QS['scroll'];
+            }
+            set_qs(QS);
         } else {
             show(font[image])
         }
@@ -153,9 +171,22 @@ function setup_editor() {
         var text = $('#scroll').val().trim();
         if(text.length > 0) {
             scroll_text(text);
+            QS['scroll'] = text;
+            delete QS['image'];
+            set_qs(QS);
         } else {
             alert("You must enter some text!");
         }
+    });
+    $('#reset').click(function(e) {
+        QS = {};
+        show(images['clear']);
+        set_flavour('banana');
+        crocodile('pin-0', false);
+        crocodile('pin-1', false);
+        crocodile('pin-2', false);
+        crocodile('pin-3v', false);
+        crocodile('pin-gnd', false);
     });
 }
 
@@ -163,13 +194,13 @@ function setup_editor() {
 // ways.
 function setup_from_url() {
     var flavour = get_qs_value("flavour");
-    var p0 = get_qs_value("p0");
-    var p1 = get_qs_value("p1");
-    var p2 = get_qs_value("p2");
-    var p3v = get_qs_value("3v");
-    var pgnd = get_qs_value("gnd");
+    var p0 = get_qs_value("pin-0");
+    var p1 = get_qs_value("pin-1");
+    var p2 = get_qs_value("pin-2");
+    var p3v = get_qs_value("pin-3v");
+    var pgnd = get_qs_value("pin-gnd");
     var image = get_qs_value("image");
-    var message = decodeURIComponent(get_qs_value("scroll"));
+    var message = get_qs_value("scroll");
     if(flavour) {
         set_flavour(flavour);
     }
@@ -195,7 +226,7 @@ function setup_from_url() {
             show(font[image])
         }
     } else if(message) {
-        scroll_text(message)
+        scroll_text(decodeURIComponent(message));
     }
 }
 
