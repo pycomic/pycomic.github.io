@@ -6,7 +6,7 @@ Array.prototype.extend = function (other_array) {
 var TIMEOUTS = [];
 
 // Used to store global state for building the query string.
-var QS = [];
+var QS = {};
 
 // Twinkle some LEDs
 function twinkle() {
@@ -52,7 +52,6 @@ function show(image, greyscale) {
 function set_flavour(flavour) {
     $('.microbit-svg .flavour').attr('class', 'flavour ' + flavour)
     QS['flavour'] = flavour;
-    set_qs(QS);
 }
 
 // Set if a crocodile clip is to be connected to the referenced pin.
@@ -65,7 +64,6 @@ function crocodile(pin_name, connected) {
         pin.hide();
         delete QS[pin_name];
     }
-    set_qs(QS);
 }
 
 // Given some text, will scroll it across the LED matrix of the micro:bit. The
@@ -154,7 +152,6 @@ function setup_editor() {
                 QS['image'] = image;
                 delete QS['scroll'];
             }
-            set_qs(QS);
         } else {
             show(font[image])
         }
@@ -173,11 +170,11 @@ function setup_editor() {
             scroll_text(text);
             QS['scroll'] = text;
             delete QS['image'];
-            set_qs(QS);
         } else {
             alert("You must enter some text!");
         }
     });
+    // Reset the form and state.
     $('#reset').click(function(e) {
         QS = {};
         show(images['clear']);
@@ -187,6 +184,10 @@ function setup_editor() {
         crocodile('pin-2', false);
         crocodile('pin-3v', false);
         crocodile('pin-gnd', false);
+    });
+    // Update the target when the direct link is clicked.
+    $('#direct-link').click(function(e) {
+        set_qs(QS);
     });
 }
 

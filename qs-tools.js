@@ -1,11 +1,22 @@
-// Get a value from the querystring for the given key.
-function get_qs_value(key) {
+// Extracts the query string and turns it into an object of key/value pairs.
+function get_qs_context() {
     var query_string = window.location.search.substring(1);
     var kv_pairs = query_string.split('&');
+    var result = {};
     for (var i = 0; i < kv_pairs.length; i++) {
         var kv_pair = kv_pairs[i].split('=');
-        if (kv_pair[0] == key) {
-            return kv_pair[1];
+        result[kv_pair[0]] = decodeURIComponent(kv_pair[1]);
+    }
+    return result;
+}
+
+// Get a value from the querystring for the given key.
+function get_qs_value(key) {
+    var context = get_qs_context();
+    var keys = Object.keys(context);
+    for (var i = 0; i < keys.length; i++) {
+        if(key == keys[i]) {
+            return context[key];
         }
     }
 }

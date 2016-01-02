@@ -19,8 +19,13 @@
 .controls {
     font-family: HelveticaNeue, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     padding-bottom: 8px;
-    border-bottom: 1px #CCC solid;
     display: none;
+    clear: both;
+}
+
+.column {
+    width: 33%;
+    display: inline;
 }
 
 .comic {
