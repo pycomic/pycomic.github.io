@@ -89,13 +89,13 @@ function update_scene(context) {
     }
     if(context.h2) {
         $('#header2').show();
-        $('#header2').text(context.h1);
+        $('#header2').text(context.h2);
     } else {
         $('#header2').hide();
     }
     if(context.h3) {
         $('#header3').show();
-        $('#header3').text(context.h1);
+        $('#header3').text(context.h2);
     } else {
         $('#header3').hide();
     }
