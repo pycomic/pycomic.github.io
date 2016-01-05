@@ -1,6 +1,16 @@
-.controls label {
+form label {
     font-weight: bold;
     margin-left: 8px;
+}
+
+.edit-me {
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: white;
+    background: black;
+    padding: 4px;
 }
 
 .controls form {
@@ -21,11 +31,6 @@
     padding-bottom: 8px;
     display: none;
     clear: both;
-}
-
-.column {
-    width: 33%;
-    display: inline;
 }
 
 .comic {
@@ -64,7 +69,7 @@
 }
 
 .strip section {
-  background-color: #eee;
+  background-color: #111;
   position: relative;
   float: left;
   width: 20em;
@@ -74,7 +79,7 @@
 }
 
 .strip section header {
-  display: block;
+  display: none;
   border: 1px solid #000;
   position: absolute;
   left: -.3em;
@@ -89,6 +94,7 @@
 }
 
 .strip section img {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -97,6 +103,21 @@
   width: 100%;
   height: 100%;
   z-index: 2
+}
+
+.strip section pre {
+  display: none;
+  z-index: 2;
+  padding: 24px 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  font-family: monospace;
+  color: #eee;
 }
 
 .strip section+section {
@@ -158,7 +179,7 @@
 
 .bubble-bottom,
 .bubble-top {
-  display: block;
+  display: none;
   position: absolute;
   background-color: #fff;
   border-radius: 1em;
@@ -292,7 +313,10 @@
 .truffle {fill: #222222;}
 .chocolate {fill: #8b4513;}
 
-.on-1,.on-2,.on-3,.on-4,.on-5,.on-6,.on-7,.on-8,.on-9,.on { fill: red; }
+#leds rect {
+    fill: #111;
+}
+.on-1,.on-2,.on-3,.on-4,.on-5,.on-6,.on-7,.on-8,.on-9,.on { fill: red !important; }
 .on-1 { opacity: 0.2; }
 .on-2 { opacity: 0.3; }
 .on-3 { opacity: 0.4; }

@@ -32,7 +32,7 @@ function pixel(x, y, value, greyscale) {
             p.attr({class: 'on-9'});
         }
     } else {
-        p.attr({class: ''});
+        p.attr({class: 'led-off'});
     }
 }
 
