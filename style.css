@@ -60,17 +60,20 @@
 }
 
 .strip {
-  overflow: hidden
+  overflow: hidden;
+  padding: 0.5em;
+  text-align: center;
+  font-family: 'Source Sans Pro', 'Liberation sans', Arial, sans-serif
 }
 
 .strip section {
   background-color: #eee;
   position: relative;
-  float: left;
+  display: inline-block;
   width: 20em;
   height: 20em;
   border: 1px solid #000;
-  margin: 1em
+  margin: 0.5em
 }
 
 .strip section header {
@@ -97,10 +100,6 @@
   width: 100%;
   height: 100%;
   z-index: 2
-}
-
-.strip section+section {
-  margin-left: 0
 }
 
 .left-python-yellow:before,
@@ -259,6 +258,8 @@
   margin-top: -2em;
   margin-right: 2em
 }
+
+.smallprint a { color: black; }
 
 .microbit-svg {
   display: block;
