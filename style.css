@@ -65,17 +65,20 @@ form label {
 }
 
 .strip {
-  overflow: hidden
+  overflow: hidden;
+  padding: 0.5em;
+  text-align: center;
+  font-family: 'Source Sans Pro', 'Liberation sans', Arial, sans-serif
 }
 
 .strip section {
   background-color: #111;
   position: relative;
-  float: left;
+  display: inline-block;
   width: 20em;
   height: 20em;
   border: 1px solid #000;
-  margin: 1em
+  margin: 0.5em
 }
 
 .strip section header {
@@ -103,25 +106,6 @@ form label {
   width: 100%;
   height: 100%;
   z-index: 2
-}
-
-.strip section pre {
-  display: none;
-  z-index: 2;
-  padding: 24px 8px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  font-family: monospace;
-  color: #eee;
-}
-
-.strip section+section {
-  margin-left: 0
 }
 
 .left-python-yellow:before,
@@ -280,6 +264,8 @@ form label {
   margin-top: -2em;
   margin-right: 2em
 }
+
+.smallprint a { color: black; }
 
 .microbit-svg {
   display: block;
