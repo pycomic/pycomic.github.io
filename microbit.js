@@ -69,16 +69,16 @@ function crocodile(pin_name, connected) {
 // Given some text, will scroll it across the LED matrix of the micro:bit. The
 // interval defines the period of time between each frame of the animation that
 // makes the text scroll.
-function scroll_text(text, interval) {
-    for(i=0; i<TIMEOUTS.length; i++) {
-        window.clearTimeout(TIMEOUTS[i]);
-    }
-    TIMEOUTS = [];
+function scroll_text(text, interval, repeat) {
     if(!interval) {
         interval = 100;
     }
     var raw_chars = [];
-    text = ' ' + text + ' ';
+    if(repeat) {
+        text = ' ' + text.trim();
+    } else {
+        text = ' ' + text.trim() + ' ';
+    }
     for(i=0; i<text.length; i++) {
         var c = text[i];
         raw_chars.push(font[c]);
@@ -110,6 +110,9 @@ function scroll_text(text, interval) {
         left++;
         right++;
         when+=interval;
+    }
+    if(repeat) {
+        TIMEOUTS.push(window.setTimeout(scroll_text, when, text, interval, repeat));
     }
 }
 
@@ -165,10 +168,16 @@ function setup_editor() {
     });
     // Text scrolling
     $('#start_scroll').click(function(e) {
+        for(i=0; i<TIMEOUTS.length; i++) {
+            window.clearTimeout(TIMEOUTS[i]);
+        }
+        TIMEOUTS = [];
         var text = $('#scroll').val().trim();
+        var repeat = $('#repeat')[0].checked;
         if(text.length > 0) {
-            scroll_text(text);
+            scroll_text(text, 100, repeat);
             QS['scroll'] = text;
+            QS['repeat'] = repeat;
             delete QS['image'];
         } else {
             alert("You must enter some text!");
@@ -202,6 +211,7 @@ function setup_from_url() {
     var pgnd = get_qs_value("pin-gnd");
     var image = get_qs_value("image");
     var message = get_qs_value("scroll");
+    var repeat = get_qs_value("repeat");
     if(flavour) {
         set_flavour(flavour);
     }
@@ -227,7 +237,11 @@ function setup_from_url() {
             show(font[image])
         }
     } else if(message) {
-        scroll_text(decodeURIComponent(message));
+        if(repeat) {
+            scroll_text(decodeURIComponent(message), 100, true);
+        } else {
+            scroll_text(decodeURIComponent(message));
+        }
     }
 }
 

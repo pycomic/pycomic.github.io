@@ -206,14 +206,6 @@ function check_item(item, context, field_name) {
     }
 }
 
-// Updates the referenced context object from the state of the UI.
-function get_context(context) {
-    check_item($('#title').text(), context, 'title');
-    check_item($('#author').text(), context, 'author');
-    check_item($('#header1').text(), context, 'h1');
-    // TODO: finish this.
-}
-
 // Add various UI controls for updating the output of the device.
 function setup_editor() {
     $('#editor-help').show();
@@ -237,6 +229,9 @@ function setup_editor() {
                 // Set up form state.
                 if(QS['h'+target_pane]) {
                     $('#form-heading')[0].checked = true;
+                }
+                if(QS['bg'+target_pane]) {
+                } else if (QS['code'+target_pane]) {
                 }
 
                 // Event handling.
@@ -275,22 +270,22 @@ function setup_editor() {
                         QS['s'+target_pane] = snakes;
                     }
                     // Speech bubbles...
-                    if($('#form-lt')[0].checked) {
+                    if($('#form-lt')[0].checked & !QS['lt'+target_pane]) {
                         QS['lt'+target_pane] = "Some text...";
                     } else {
                         delete QS['lt'+target_pane];
                     }
-                    if($('#form-rt')[0].checked) {
+                    if($('#form-rt')[0].checked & !QS['rt'+target_pane]) {
                         QS['rt'+target_pane] = "Some text...";
                     } else {
                         delete QS['rt'+target_pane];
                     }
-                    if($('#form-lb')[0].checked) {
+                    if($('#form-lb')[0].checked & !QS['lb'+target_pane]) {
                         QS['lb'+target_pane] = "Some text...";
                     } else {
                         delete QS['lb'+target_pane];
                     }
-                    if($('#form-rb')[0].checked) {
+                    if($('#form-rb')[0].checked & !QS['rb'+target_pane]) {
                         QS['rb'+target_pane] = "Some text...";
                     } else {
                         delete QS['rb'+target_pane];
