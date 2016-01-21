@@ -79,6 +79,16 @@
   float: left;
 }
 
+.field.full {
+  width: 100%;
+}
+
+.field.full input {
+  width: 90%;
+  padding-right: 0.5em;
+  line-height: 1.5;
+}
+
 .newframe, .frame {
   float: left;
 }
