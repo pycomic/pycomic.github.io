@@ -79,6 +79,10 @@
   float: left;
 }
 
+.newframe, .frame {
+  float: left;
+}
+
 .newframe {
   position: relative;
   background-color: #eee;
@@ -87,6 +91,7 @@
   height: 20em;
   border: 1px solid #000;
   cursor: pointer;
+  margin: 0.5em
 }
 .newframe:before {
   content: '';
