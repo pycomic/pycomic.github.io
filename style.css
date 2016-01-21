@@ -79,6 +79,50 @@
   float: left;
 }
 
+.newframe {
+  position: relative;
+  background-color: #eee;
+  display: block;
+  width: 20em;
+  height: 20em;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+.newframe:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 15em;
+  height: 15em;
+  border-radius: 15em;
+  left: 50%;
+  top: 50%;
+  margin-left: -7.5em;
+  margin-top: -7.5em;
+  background-color: white;
+  border: 1px solid #999;
+}
+
+.newframe:after {
+  content: '+';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: #999;
+  font-size: 200px;
+  font-weight: bold;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+  margin-left: -0.5em;
+  margin-top: -0.5em;
+}
+
+.newframe:hover:before { background-color: black; }
+.newframe:hover:after { color: white; }
+
 .strip section {
   position: relative;
   background-color: #eee;
