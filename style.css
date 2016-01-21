@@ -148,6 +148,28 @@
   width: 20em;
 }
 
+.delete:before { content: '×'; }
+
+.delete {
+  display: block;
+  border: 1px solid #000;
+  position: absolute;
+  right: -.5em;
+  top: -.5em;
+  width: 1em;
+  height: 1em;
+  text-align: center;
+  line-height: 1em;
+  background: #fff;
+  padding: .25em;
+  box-shadow: .1em .1em .1em rgba(0, 0, 0, .5);
+  border-radius: 1em;
+  font-weight: 600;
+  z-index: 10;
+  cursor: pointer;
+}
+.delete:hover { background-color: red; color: white; }
+
 .strip section header {
   display: block;
   border: 1px solid #000;
