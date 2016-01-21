@@ -66,14 +66,37 @@
   font-family: 'Source Sans Pro', 'Liberation sans', Arial, sans-serif
 }
 
-.strip section {
-  background-color: #eee;
+.frame {
   position: relative;
   display: inline-block;
   width: 20em;
+  margin: 0.5em
+}
+
+.field {
+  display: block;
+  width: 50%;
+  float: left;
+}
+
+.strip section {
+  position: relative;
+  background-color: #eee;
+  display: block;
+  width: 20em;
   height: 20em;
   border: 1px solid #000;
-  margin: 0.5em
+
+}
+
+.strip form {
+  position: relative;
+  display: block;
+  border: 1px solid #000;
+  margin: 5px 0 0 0;
+  background-color: #eee;
+  overflow: hidden;
+  width: 20em;
 }
 
 .strip section header {
