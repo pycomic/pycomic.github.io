@@ -3,118 +3,164 @@
     <head>
         <title>Python Comic</title>
         <link rel="stylesheet" href="style.css"/>
-        <link rel="stylesheet" href="vex.css" />
-        <link rel="stylesheet" href="vex-theme-wireframe.css" />
         <script src="jquery-2.1.4.min.js"></script>
         <script src="qs-tools.js"></script>
         <script src="background.js"></script>
-        <script src="mustache.min.js"></script>
-        <script src="vex.combined.min.js"></script>
         <script src="comic.js"></script>
-        <script>vex.defaultOptions.className = 'vex-theme-wireframe';</script>
     </head>
     <body>
-    <script id="form-template" type="x-tmpl-mustache">
-        <h1>Layout for Pane #{{target_pane}}</h1>
-        <p>Select from the following options. Edit
-        text in-place in the pane at the indicated locations.</p>
-        <form id="pane-edit">
-        <p><label for="form-heading">Heading:</label>
-        <input id="form-heading" type="checkbox"/></p>
-        <p><label for="form-background">Background:</label>
-        <select id="form-background">
-            <option value="none">None</option>
-            <option value="custom">Custom</option>
-            <option value="code">Example Code (edit in the pane)</option>
-            {{#backgrounds}}
-            <option value="{{.}}">{{.}}</option>
-            {{/backgrounds}}
-        </select>
-        <label for="form-image-url" style="display: none;" class="custom-image">URL for custom image:</label>
-        <input id="form-image-url" type="text" style="display: none;" class="custom-image"/></p>
-        <p><label for="form-snakes">Snakes:</label>
-        <select id="form-snakes">
-            <option value="none">None</option>
-            <option value="both">Both</option>
-            <option value="yellow">Yellow</option>
-            <option value="blue">Blue</option>
-        </select></p>
-        <p><label for="form-tl">Speech bubbles:</label>
-        <input type="checkbox" value="lt" id="form-lt">Top Left</input>
-        <input type="checkbox" value="rt" id="form-rt">Top Right</input>
-        <input type="checkbox" value="lb" id="form-lb">Bottom Left</input>
-        <input type="checkbox" value="rb" id="form-rb">Bottom Right</input></p>
-        <p><button type="submit">OK</button>
-        <button type="reset" id="reset-button">Reset</button></p>
-        </form>
-    </script>
     <main class="comic">
         <header class="title">
-            <h1 id="title" field-name='title'>Un-named Comic (Click to edit)</h1>
+            <h1 id="title">Python Comic</h1>
             <h2>by</h2>
-            <h2 id="author" field-name='author'>Anonymous (Click to edit)</h2>
+            <h2 id="author">Anonymous Author</h2>
         </header>
+
         <article class="strip">
-            <section id="pane1" class="">
-                <div class="edit-me" id="edit1">EDIT</div>
-                <header id="header1" class="textual"></header>
-                <img id="bg1" src="" />
-                <pre id="code1"><code class="textual"></code></pre>
-                <div class="bubble-top">
-                    <p class="textual"></p>
-                </div>
-                <div class="bubble-top right">
-                    <p class="textual"></p>
-                </div>
-                <div class="bubble-bottom">
-                    <p class="textual"></p>
-                </div>
-                <div class="bubble-bottom right">
-                    <p class="textual"></p>
-                </div>
-            </section>
-            <section id="pane2" class="">
-                <div class="edit-me" id="edit2">EDIT</div>
-                <header id="header2" class="textual"></header>
-                <img id="bg2" src="" />
-                <pre id="code2"><code class="textual"></code></pre>
-                <div class="bubble-top">
-                    <p class="textual"></p>
-                </div>
-                <div class="bubble-top right">
-                    <p class="textual"></p>
-                </div>
-                <div class="bubble-bottom">
-                    <p class="textual"></p>
-                </div>
-                <div class="bubble-bottom right">
-                    <p class="textual"></p>
-                </div>
-            </section>
-            <section id="pane3" class="">
-                <div class="edit-me" id="edit3">EDIT</div>
-                <header id="header3" class="textual"></header>
-                <img id="bg3" src="" />
-                <pre id="code3"><code class="textual"></code></pre>
-                <div class="bubble-top">
-                    <p class="textual"></p>
-                </div>
-                <div class="bubble-top right">
-                    <p class="textual"></p>
-                </div>
-                <div class="bubble-bottom">
-                    <p class="textual"></p>
-                </div>
-                <div class="bubble-bottom right">
-                    <p class="textual"></p>
-                </div>
-            </section>
+            <div class="frame">
+                <section id="pane1" class="">
+                    <header id="header1" class="textual"></header>
+                    <img id="bg1" src="" />
+                    <pre id="code1"><code class="textual"></code></pre>
+                    <div class="bubble-top">
+                        <p class="textual"></p>
+                    </div>
+                    <div class="bubble-top right">
+                        <p class="textual"></p>
+                    </div>
+                    <div class="bubble-bottom">
+                        <p class="textual"></p>
+                    </div>
+                    <div class="bubble-bottom right">
+                        <p class="textual"></p>
+                    </div>
+                </section>
+                <form>
+                    <p><label for="form-heading">Heading:</label>
+                    <input id="form-heading" type="checkbox"/></p>
+                    <p><label for="form-background">Background:</label>
+                    <select id="form-background">
+                        <option value="none">None</option>
+                        <option value="custom">Custom</option>
+                        <option value="code">Example Code (edit in the pane)</option>
+                        {{#backgrounds}}
+                        <option value="{{.}}">{{.}}</option>
+                        {{/backgrounds}}
+                    </select></p>
+                    <p><input id="form-image-url" type="text" class="custom-image"/></p>
+                    <p><label for="form-snakes">Snakes:</label>
+                    <select id="form-snakes">
+                        <option value="none">None</option>
+                        <option value="both">Both</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="blue">Blue</option>
+                    </select></p>
+                    <p><label for="form-tl">Speech bubbles:</label><br/>
+                    <input type="checkbox" value="lt" id="form-lt">Top Left</input>
+                    <input type="checkbox" value="rt" id="form-rt">Top Right</input><br/>
+                    <input type="checkbox" value="lb" id="form-lb">Bottom Left</input>
+                    <input type="checkbox" value="rb" id="form-rb">Bottom Right</input></p>
+                    <button type="reset" id="reset-button">Reset</button></p>
+                </form>
+            </div>
+            <div class="frame">
+                <section id="pane2" class="">
+                    <header id="header2" class="textual"></header>
+                    <img id="bg2" src="" />
+                    <pre id="code2"><code class="textual"></code></pre>
+                    <div class="bubble-top">
+                        <p class="textual"></p>
+                    </div>
+                    <div class="bubble-top right">
+                        <p class="textual"></p>
+                    </div>
+                    <div class="bubble-bottom">
+                        <p class="textual"></p>
+                    </div>
+                    <div class="bubble-bottom right">
+                        <p class="textual"></p>
+                    </div>
+                </section>
+                <form>
+                    <p><label for="form-heading">Heading:</label>
+                    <input id="form-heading" type="checkbox"/></p>
+                    <p><label for="form-background">Background:</label>
+                    <select id="form-background">
+                        <option value="none">None</option>
+                        <option value="custom">Custom</option>
+                        <option value="code">Example Code (edit in the pane)</option>
+                        {{#backgrounds}}
+                        <option value="{{.}}">{{.}}</option>
+                        {{/backgrounds}}
+                    </select></p>
+                    <p><input id="form-image-url" type="text" class="custom-image"/></p>
+                    <p><label for="form-snakes">Snakes:</label>
+                    <select id="form-snakes">
+                        <option value="none">None</option>
+                        <option value="both">Both</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="blue">Blue</option>
+                    </select></p>
+                    <p><label for="form-tl">Speech bubbles:</label><br/>
+                    <input type="checkbox" value="lt" id="form-lt">Top Left</input>
+                    <input type="checkbox" value="rt" id="form-rt">Top Right</input><br/>
+                    <input type="checkbox" value="lb" id="form-lb">Bottom Left</input>
+                    <input type="checkbox" value="rb" id="form-rb">Bottom Right</input></p>
+                    <button type="reset" id="reset-button">Reset</button></p>
+                </form>
+            </div>
+
+            <div class="frame">
+                <section id="pane3" class="">
+                    <header id="header3" class="textual"></header>
+                    <img id="bg3" src="" />
+                    <pre id="code3"><code class="textual"></code></pre>
+                    <div class="bubble-top">
+                        <p class="textual"></p>
+                    </div>
+                    <div class="bubble-top right">
+                        <p class="textual"></p>
+                    </div>
+                    <div class="bubble-bottom">
+                        <p class="textual"></p>
+                    </div>
+                    <div class="bubble-bottom right">
+                        <p class="textual"></p>
+                    </div>
+                </section>
+                <form>
+                    <p><label for="form-heading">Heading:</label>
+                    <input id="form-heading" type="checkbox"/></p>
+                    <p><label for="form-background">Background:</label>
+                    <select id="form-background">
+                        <option value="none">None</option>
+                        <option value="custom">Custom</option>
+                        <option value="code">Example Code (edit in the pane)</option>
+                        {{#backgrounds}}
+                        <option value="{{.}}">{{.}}</option>
+                        {{/backgrounds}}
+                    </select></p>
+                    <p><input id="form-image-url" type="text" class="custom-image"/></p>
+                    <p><label for="form-snakes">Snakes:</label>
+                    <select id="form-snakes">
+                        <option value="none">None</option>
+                        <option value="both">Both</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="blue">Blue</option>
+                    </select></p>
+                    <p><label for="form-tl">Speech bubbles:</label><br/>
+                    <input type="checkbox" value="lt" id="form-lt">Top Left</input>
+                    <input type="checkbox" value="rt" id="form-rt">Top Right</input><br/>
+                    <input type="checkbox" value="lb" id="form-lb">Bottom Left</input>
+                    <input type="checkbox" value="rb" id="form-rb">Bottom Right</input></p>
+                    <button type="reset" id="reset-button">Reset</button></p>
+                </form>
+            </div>
         </article>
         <footer class="smallprint">
-            <p id="home-link">Generated by Python Comics.
-            <a href="http://pycomic.github.io/">MAKE YOUR OWN</a>.</p>
-            <p id="editor-help">Click panes to edit.
-            <a href="" id="direct-link">Direct Link</a>.</p>
+            <p>Generated by Python Comics.
+            <a href="http://pycomic.github.io/" id="home-link">MAKE YOUR OWN</a>
+            <a href="" id="direct-link">Direct Link</a>
             </p>
         </footer>
     </main>
