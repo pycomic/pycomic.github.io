@@ -73,6 +73,14 @@
   margin: 0.5em
 }
 
+.frame pre {
+    background: black;
+    text-align: left;
+    color: #DDD;
+    font: Courier;
+    padding: 16px 6px;
+}
+
 .field {
   display: block;
   width: 50%;
@@ -140,7 +148,7 @@
 
 .strip section {
   position: relative;
-  background-color: #eee;
+  background-color: black;
   display: block;
   width: 20em;
   height: 20em;
@@ -370,3 +378,18 @@
 }
 
 .smallprint a { color: black; }
+
+#editor-help {
+    margin-top: 8px;
+    float: right;
+}
+
+a, a:visited {
+    color: #0000FF;
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    text-decoration: underline;
+}
+

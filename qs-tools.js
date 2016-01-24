@@ -33,5 +33,17 @@ function set_qs(settings) {
     }
     var old_url = window.location.href.split('?');
     var new_url = old_url[0] + '?' + qs_array.join('&');
-    $('#direct-link').attr('href', new_url);
+    // shortener API
+    var url = "https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyB2_Cwh5lKUX4a681ZERd3FAt8ijdwbukk";
+    $.ajax(url, {
+        type: "POST",
+        contentType: 'application/json',
+        data: JSON.stringify({
+            longUrl: new_url
+        })
+    }).done(function( data ) {
+        console.log(data);
+        $('#direct-link').attr('href', data.id);
+        $('#direct-link').text(data.id);
+    });
 }

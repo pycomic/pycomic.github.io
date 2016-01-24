@@ -12,7 +12,6 @@
     <body>
     <div class="controls">
         <form id="control-form">
-        <button type="reset" id="reset">Reset</button>
         <label for="flavour">Flavour</label>
         <select id="flavour" name="flavour">
             <option value="banana">Banana</option>
@@ -42,9 +41,10 @@
         <input type="text" id="scroll" name="scroll"/>
         <label for="repeat">Repeat</label>
         <input type="checkbox" id="repeat" name="repeat"/>
+        <button id="start_scroll">Scroll</button><br/>
+        <button type="reset" id="reset">Reset</button>
         </form>
-        <button id="start_scroll">GO</button>
-        <a href="http://pycomic.github.io/microbit.html" id="direct-link" target="_new">Direct Link</a>
+        <span id="editor-help"><button id="direct-button">Get Direct Link</button> <a href="#" id="direct-link"></a></span>
     </div>
 <div class="microbit-svg">
 

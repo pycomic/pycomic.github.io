@@ -123,16 +123,16 @@ function update_scene(context) {
     }
     // Speech bubbles
     if(context.lt1) {
-        $('#pane1 .bubble-top').show();
-        $('#pane1 .bubble-top p').text(context.lt1);
+        $('#pane1 .bubble-top.left').show();
+        $('#pane1 .bubble-top.left p').text(context.lt1);
     } else {
-        $('#pane1 .bubble-top').hide();
+        $('#pane1 .bubble-top.left').hide();
     }
     if(context.lb1) {
-        $('#pane1 .bubble-bottom').show();
-        $('#pane1 .bubble-bottom p').text(context.lb1);
+        $('#pane1 .bubble-bottom.left').show();
+        $('#pane1 .bubble-bottom.left p').text(context.lb1);
     } else {
-        $('#pane1 .bubble-bottom').hide();
+        $('#pane1 .bubble-bottom.left').hide();
     }
     if(context.rt1) {
         $('#pane1 .bubble-top.right').show();
@@ -147,16 +147,16 @@ function update_scene(context) {
         $('#pane1 .bubble-bottom.right').hide();
     }
     if(context.lt2) {
-        $('#pane2 .bubble-top').show();
-        $('#pane2 .bubble-top p').text(context.lt2);
+        $('#pane2 .bubble-top.left').show();
+        $('#pane2 .bubble-top.left p').text(context.lt2);
     } else {
-        $('#pane2 .bubble-top').hide();
+        $('#pane2 .bubble-top.left').hide();
     }
     if(context.lb2) {
-        $('#pane2 .bubble-bottom').show();
-        $('#pane2 .bubble-bottom p').text(context.lb2);
+        $('#pane2 .bubble-bottom.left').show();
+        $('#pane2 .bubble-bottom.left p').text(context.lb2);
     } else {
-        $('#pane2 .bubble-bottom').hide();
+        $('#pane2 .bubble-bottom.left').hide();
     }
     if(context.rt2) {
         $('#pane2 .bubble-top.right').show();
@@ -171,16 +171,16 @@ function update_scene(context) {
         $('#pane2 .bubble-bottom.right').hide();
     }
     if(context.lt3) {
-        $('#pane3 .bubble-top').show();
-        $('#pane3 .bubble-top p').text(context.lt3);
+        $('#pane3 .bubble-top.left').show();
+        $('#pane3 .bubble-top.left p').text(context.lt3);
     } else {
-        $('#pane3 .bubble-top').hide();
+        $('#pane3 .bubble-top.left').hide();
     }
     if(context.lb3) {
-        $('#pane3 .bubble-bottom').show();
-        $('#pane3 .bubble-bottom p').text(context.lb3);
+        $('#pane3 .bubble-bottom.left').show();
+        $('#pane3 .bubble-bottom.left p').text(context.lb3);
     } else {
-        $('#pane3 .bubble-bottom').hide();
+        $('#pane3 .bubble-bottom.left').hide();
     }
     if(context.rt3) {
         $('#pane3 .bubble-top.right').show();
@@ -210,105 +210,152 @@ function check_item(item, context, field_name) {
 function setup_editor() {
     $('#editor-help').show();
     $('#home-link').hide();
+    $('.frame form').show();
     // Set text fields contenteditable.
     $('#title').attr('contenteditable', 'true');
     $('#author').attr('contenteditable', 'true');
     $('.textual').attr('contenteditable', 'true');
-    // Clicking on sections drops you into edit mode.
-    $('.edit-me').click(function(e) {
-        var target_pane = e.target.id.slice(-1); // get the pane number.
-        var template = $('#form-template').html();
-        Mustache.parse(template);
-        var context = {
-            target_pane: target_pane,
-            backgrounds: Object.keys(BACKGROUNDS).sort()
-        };
-        vex.open({
-            content: Mustache.render(template, context),
-            afterOpen: function(vexContent) {
-                // Set up form state.
-                if(QS['h'+target_pane]) {
-                    $('#form-heading')[0].checked = true;
+    // Connect the configuration forms to the panels.
+    var form1 = $('#form1');
+    var form2 = $('#form2');
+    var form3 = $('#form3');
+    var pane1 = $('#pane1');
+    var pane2 = $('#pane2');
+    var pane3 = $('#pane3');
+    // A function to connect a form to a panel.
+    function connect(form, pane) {
+        var form_header = form.find('#form-heading');
+        var pane_header = pane.find('.header');
+        var form_background = form.find('#form-background');
+        var pane_background = pane.find('.bg_image');
+        var pane_code = pane.find('.pre_code');
+        var form_image_url = form.find('#form-image-url');
+        pane_code.hide();
+        pane_background.hide();
+        form_header.change(function(e) {
+            if(form_header[0].checked) {
+                pane_header.show();
+                if(!pane_header.text()) {
+                    pane_header.text('Header text...');
                 }
-                if(QS['bg'+target_pane]) {
-                } else if (QS['code'+target_pane]) {
-                }
-
-                // Event handling.
-                $(vexContent).find('#form-background').change(function(e) {
-                    var bg = $(this).find("option:selected").attr('value');
-                    if(bg==='custom') {
-                        $('.custom-image').show();
-                    } else {
-                        $('.custom-image').hide();
-                    }
-                });
-                $(vexContent).find('#pane-edit').change(function(e) {
-                    if($('#form-heading')[0].checked & !QS['h'+target_pane]) {
-                        QS['h'+target_pane] = 'Header text...';
-                    } else {
-                        delete QS['h'+target_pane];
-                    }
-                    var background = $('#form-background').find("option:selected").attr('value');
-                    if(background === 'none') {
-                       delete QS['bg'+target_pane];
-                       delete QS['code'+target_pane];
-                    } else if (background === 'custom') {
-                       QS['bg'+target_pane] = $('#form-image-url').val();
-                       delete QS['code'+target_pane];
-                    } else if (background === 'code') {
-                       delete QS['bg'+target_pane];
-                       QS['code'+target_pane] = 'from microbit import *\n\n// Your code here.';
-                    } else {
-                       delete QS['code'+target_pane];
-                       QS['bg'+target_pane] = 'bg/'+BACKGROUNDS[background];
-                    }
-                    var snakes = $('#form-snakes').find("option:selected").attr('value');
-                    if(snakes === 'none') {
-                        delete QS['s'+target_pane];
-                    } else {
-                        QS['s'+target_pane] = snakes;
-                    }
-                    // Speech bubbles...
-                    if($('#form-lt')[0].checked & !QS['lt'+target_pane]) {
-                        QS['lt'+target_pane] = "Some text...";
-                    } else {
-                        delete QS['lt'+target_pane];
-                    }
-                    if($('#form-rt')[0].checked & !QS['rt'+target_pane]) {
-                        QS['rt'+target_pane] = "Some text...";
-                    } else {
-                        delete QS['rt'+target_pane];
-                    }
-                    if($('#form-lb')[0].checked & !QS['lb'+target_pane]) {
-                        QS['lb'+target_pane] = "Some text...";
-                    } else {
-                        delete QS['lb'+target_pane];
-                    }
-                    if($('#form-rb')[0].checked & !QS['rb'+target_pane]) {
-                        QS['rb'+target_pane] = "Some text...";
-                    } else {
-                        delete QS['rb'+target_pane];
-                    }
-                });
-                $(vexContent).find('#pane-edit').submit(function(e) {
-                    update_scene(QS);
-                    $('.textual').attr('contenteditable', 'true');
-                    vex.close();
-                    return false;
-                });
-                $(vexContent).find('#reset-button').click(function(e) {
-                    delete QS['h'+target_pane];
-                    delete QS['bg'+target_pane];
-                    delete QS['code'+target_pane];
-                    delete QS['s'+target_pane];
-                    delete QS['lt'+target_pane];
-                    delete QS['rt'+target_pane];
-                    delete QS['lb'+target_pane];
-                    delete QS['rb'+target_pane];
-                });
+            } else {
+                pane_header.hide();
             }
         });
+        form.find('#form-background').change(function(e) {
+            var bg = $(this).find("option:selected").attr('value');
+            form.find('#form-image-url').prop('disabled', true);
+            if(bg==='custom') {
+                pane_background.show();
+                pane_code.hide();
+                var custom_url = form.find('#form-image-url');
+                custom_url.prop('disabled', false);
+                if(custom_url.val()) {
+                    var url = custom_url.val();
+                    pane_background.attr('src', url);
+                }
+                custom_url.focus();
+            } else if(bg==='none') {
+                pane_background.hide();
+                pane_code.hide();
+            } else if(bg==='code') {
+                pane_background.hide();
+                pane_code.show();
+                var code_holder = pane.find('.source_code');
+                if(!code_holder.text()) {
+                    code_holder.text('from microbit import *\n\n# Edit your code here!\n\ndisplay.scroll("Hello, World!")');
+                }
+            } else {
+                pane_background.show();
+                pane_code.hide();
+                if(bg === 'random') {
+                    var seed = Math.floor((Math.random() * 1000) + 1);
+                    pane_background.attr('src', 'http://lorempixel.com/320/320/?v='+seed);
+                } else {
+                    pane_background.attr('src', 'bg/'+bg);
+                }
+            }
+        });
+        form.find('.custom-image').on('input', function(e) {
+            var url = $(this).val();
+            pane_background.attr('src', url);
+        });
+        form.find('#form-snakes').change(function(e) {
+            var snakes = $(this).find("option:selected").attr('value');
+            pane.removeClass();
+            if(snakes==='both') {
+                pane.addClass('left-python-yellow right-python-blue');
+            } else if(snakes==='yellow') {
+                pane.addClass('left-python-yellow');
+            } else if(snakes==='blue') {
+                pane.addClass('right-python-blue');
+            }
+        });
+        form.find('#form-lt').change(function(e) {
+            var holder = pane.find('.bubble-top.left');
+            var text_p = pane.find('.bubble-top.left p');
+            if(this.checked) {
+                holder.show();
+                if(!text_p.text()) {
+                    text_p.text('Edit this..!');
+                }
+            } else {
+                holder.hide();
+            }
+        });
+        form.find('#form-lb').change(function(e) {
+            var holder = pane.find('.bubble-bottom.left');
+            var text_p = pane.find('.bubble-bottom.left p');
+            if(this.checked) {
+                holder.show();
+                if(!text_p.text()) {
+                    text_p.text('Edit this..!');
+                }
+            } else {
+                holder.hide();
+            }
+        });
+        form.find('#form-rt').change(function(e) {
+            var holder = pane.find('.bubble-top.right');
+            var text_p = pane.find('.bubble-top.right p');
+            if(this.checked) {
+                holder.show();
+                if(!text_p.text()) {
+                    text_p.text('Edit this..!');
+                }
+            } else {
+                holder.hide();
+            }
+        });
+        form.find('#form-rb').change(function(e) {
+            var holder = pane.find('.bubble-bottom.right');
+            var text_p = pane.find('.bubble-bottom.right p');
+            if(this.checked) {
+                holder.show();
+                if(!text_p.text()) {
+                    text_p.text('Edit this..!');
+                }
+            } else {
+                holder.hide();
+            }
+        });
+        form.find('#reset-button').click(function(e) {
+            pane_header.hide();
+            pane_background.hide();
+            pane.removeClass();
+            pane.find('.bubble-top.left').hide();
+            pane.find('.bubble-bottom.left').hide();
+            pane.find('.bubble-top.right').hide();
+            pane.find('.bubble-bottom.right').hide();
+            pane.find('.textual').text('');
+        });
+    }
+    connect(form1, pane1);
+    connect(form2, pane2);
+    connect(form3, pane3);
+    $('#direct-button').click(function(e) {
+        var state = get_state_from_dom();
+        set_qs(state);
     });
 }
 
@@ -317,9 +364,86 @@ function setup_editor() {
 function setup_from_url() {
     QS = get_qs_context();
     update_scene(QS);
+    $('.frame form').hide();
     $('#editor-help').hide();
     $('#home-link').show();
     $('.edit-me').hide();
+}
+
+function get_state_from_dom() {
+    var result = {};
+    var form1 = $('#form1');
+    var form2 = $('#form2');
+    var form3 = $('#form3');
+    var pane1 = $('#pane1');
+    var pane2 = $('#pane2');
+    var pane3 = $('#pane3');
+    result.title = $('#title').text();
+    result.author = $('#author').text();
+    if($('#bg1').is(":visible")) {
+        result.bg1 = $('#bg1').attr('src');
+    } else if ($('#code1').is(':visible')) {
+        result.code1 = $('#code1').text();
+    }
+    if($('#bg2').is(":visible")) {
+        result.bg2 = $('#bg2').attr('src');
+    } else if ($('#code2').is(':visible')) {
+        result.code2 = $('#code2').text();
+    }
+    if($('#bg3').is(":visible")) {
+        result.bg3 = $('#bg3').attr('src');
+    } else if ($('#code3').is(':visible')) {
+        result.code3 = $('#code1').text();
+    }
+    var s1 = form1.find('#form-snakes').find("option:selected").attr('value');
+    if(s1!=='none') {
+        result.s1 = s1;
+    }
+    var s2 = form2.find('#form-snakes').find("option:selected").attr('value');
+    if(s2!=='none') {
+        result.s2 = s2;
+    }
+    var s3 = form3.find('#form-snakes').find("option:selected").attr('value');
+    if(s3!=='none') {
+        result.s3 = s3;
+    }
+    if(pane1.find('.bubble-top.left').is(':visible')) {
+        result.lt1 = pane1.find('.bubble-top.left p').text();
+    }
+    if(pane1.find('.bubble-top.right').is(':visible')) {
+        result.rt1 = pane1.find('.bubble-top.right p').text();
+    }
+    if(pane1.find('.bubble-bottom.left').is(':visible')) {
+        result.lb1 = pane1.find('.bubble-bottom.left p').text();
+    }
+    if(pane1.find('.bubble-bottom.right').is(':visible')) {
+        result.rb1 = pane1.find('.bubble-bottom.right p').text();
+    }
+    if(pane2.find('.bubble-top.left').is(':visible')) {
+        result.lt2 = pane2.find('.bubble-top.left p').text();
+    }
+    if(pane2.find('.bubble-top.right').is(':visible')) {
+        result.rt2 = pane2.find('.bubble-top.right p').text();
+    }
+    if(pane2.find('.bubble-bottom.left').is(':visible')) {
+        result.lb2 = pane2.find('.bubble-bottom.left p').text();
+    }
+    if(pane2.find('.bubble-bottom.right').is(':visible')) {
+        result.rb2 = pane2.find('.bubble-bottom.right p').text();
+    }
+    if(pane3.find('.bubble-top.left').is(':visible')) {
+        result.lt3 = pane3.find('.bubble-top.left p').text();
+    }
+    if(pane3.find('.bubble-top.right').is(':visible')) {
+        result.rt3 = pane3.find('.bubble-top.right p').text();
+    }
+    if(pane3.find('.bubble-bottom.left').is(':visible')) {
+        result.lb3 = pane3.find('.bubble-bottom.left p').text();
+    }
+    if(pane3.find('.bubble-bottom.right').is(':visible')) {
+        result.rb3 = pane3.find('.bubble-bottom.right p').text();
+    }
+    return result;
 }
 
 // Run on start-up

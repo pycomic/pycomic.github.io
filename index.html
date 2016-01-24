@@ -5,7 +5,6 @@
         <link rel="stylesheet" href="style.css"/>
         <script src="jquery-2.1.4.min.js"></script>
         <script src="qs-tools.js"></script>
-        <script src="background.js"></script>
         <script src="comic.js"></script>
     </head>
     <body>
@@ -14,40 +13,104 @@
             <h1 id="title">Python Comic</h1>
             <h2>by</h2>
             <h2 id="author">Anonymous Author</h2>
+            <span id="editor-help"><button id="direct-button">Get Direct Link</button> <a href="#" id="direct-link"></a></span>
         </header>
 
         <article class="strip">
-            <div class="frame">
+            <div class="frame" id="frame1">
                 <section id="pane1" class="">
-                    <header id="header1" class="textual"></header>
-                    <img id="bg1" src="" />
-                    <pre id="code1"><code class="textual"></code></pre>
-                    <div class="bubble-top">
+                    <header id="header1" class="textual header"></header>
+                    <img id="bg1" src="" class="bg_image"/>
+                    <pre id="code1" class="pre_code"><code class="textual source_code"></code></pre>
+                    <div class="bubble-top left">
                         <p class="textual"></p>
                     </div>
                     <div class="bubble-top right">
                         <p class="textual"></p>
                     </div>
-                    <div class="bubble-bottom">
+                    <div class="bubble-bottom left">
                         <p class="textual"></p>
                     </div>
                     <div class="bubble-bottom right">
                         <p class="textual"></p>
                     </div>
                 </section>
-                <form>
+                <form id="form1">
                     <p><label for="form-heading">Heading:</label>
                     <input id="form-heading" type="checkbox"/></p>
                     <p><label for="form-background">Background:</label>
                     <select id="form-background">
                         <option value="none">None</option>
-                        <option value="custom">Custom</option>
+                        <option value="random">Random</option>
+                        <option value="custom">Custom (enter URL below)</option>
                         <option value="code">Example Code (edit in the pane)</option>
-                        {{#backgrounds}}
-                        <option value="{{.}}">{{.}}</option>
-                        {{/backgrounds}}
+                        <option value="arm1_chip.gif">ARM1 Chip</option>
+                        <option value="bauhaus.jpg">Bauhaus</option>
+                        <option value="bbc_basic.gif">BBC Basic</option>
+                        <option value="bbc_micro.jpg">BBC Micro</option>
+                        <option value="bbc_microbit_back.jpg">BBC micro:bit back</option>
+                        <option value="bbc_microbit_front.jpg">BBC micro:bit front</option>
+                        <option value="bbc_microbit_logo.jpg">BBC micro:bit logo</option>
+                        <option value="bbc_owl.jpg">BBC Owl</option>
+                        <option value="beach.jpg">Beach</option>
+                        <option value="belfast.jpg">Belfast</option>
+                        <option value="bluebells.jpg">Bluebells</option>
+                        <option value="cardiff.jpg">Cardiff</option>
+                        <option value="circuit.jpg">Circuit</option>
+                        <option value="cloudy_lake.jpg">Cloudy Lake</option>
+                        <option value="colossus.jpg">Colossus</option>
+                        <option value="computer_class.jpg">Computer Class</option>
+                        <option value="country_lane.jpg">Country Lane</option>
+                        <option value="death_star.jpg">Death Star</option>
+                        <option value="doradus.jpg">Doradus</option>
+                        <option value="dunes.jpg">Dunes</option>
+                        <option value="edinburgh.jpg">Edinburgh</option>
+                        <option value="field.jpg">Field</option>
+                        <option value="fish.jpg">Fish</option>
+                        <option value="forest_lake.jpg">Forest Lake</option>
+                        <option value="forest_stream.jpg">Forest Stream</option>
+                        <option value="guido.jpg">Guido van Rossum</option>
+                        <option value="london.jpg">London</option>
+                        <option value="mars.jpg">Mars</option>
+                        <option value="monument_valley.jpg">Monument Valley</option>
+                        <option value="moon.jpg">Moon</option>
+                        <option value="mountain_river.jpg">Mountain River</option>
+                        <option value="office.jpg">Office</option>
+                        <option value="old_computer.jpg">Old Computer</option>
+                        <option value="pattern01.jpg">Pattern 01</option>
+                        <option value="pattern02.jpg">Pattern 02</option>
+                        <option value="pattern03.jpg">Pattern 03</option>
+                        <option value="pattern04.jpg">Pattern 04</option>
+                        <option value="pattern05.jpg">Pattern 05</option>
+                        <option value="pattern06.jpg">Pattern 06</option>
+                        <option value="pattern07.jpg">Pattern 07</option>
+                        <option value="pattern08.jpg">Pattern 08</option>
+                        <option value="pattern09.jpg">Pattern 09</option>
+                        <option value="pattern10.jpg">Pattern 10</option>
+                        <option value="pattern11.jpg">Pattern 11</option>
+                        <option value="pattern12.jpg">Pattern 12</option>
+                        <option value="pattern13.jpg">Pattern 13</option>
+                        <option value="pattern14.jpg">Pattern 14</option>
+                        <option value="pattern15.jpg">Pattern 15</option>
+                        <option value="pattern16.jpg">Pattern 16</option>
+                        <option value="pattern17.jpg">Pattern 17</option>
+                        <option value="pattern18.jpg">Pattern 18</option>
+                        <option value="pattern19.jpg">Pattern 19</option>
+                        <option value="pattern20.jpg">Pattern 20</option>
+                        <option value="pattern21.jpg">Pattern 21</option>
+                        <option value="phosphor_sea.jpg">Phosphor Sea</option>
+                        <option value="pong.jpg">Pong</option>
+                        <option value="python_powered.jpg">Python Powered</option>
+                        <option value="raspberry_pi.jpg">Raspberry Pi</option>
+                        <option value="seaside.jpg">Seaside</option>
+                        <option value="servers.jpg">Servers</option>
+                        <option value="skulls.jpg">Skulls</option>
+                        <option value="snow.jpg">Snow</option>
+                        <option value="solar_system.jpg">Solar System</option>
+                        <option value="sunset.jpg">Sunset</option>
+                        <option value="winter_sun.jpg">Winter Sun</option>
                     </select></p>
-                    <p><input id="form-image-url" type="text" class="custom-image"/></p>
+                    <p><input id="form-image-url" type="text" class="custom-image" disabled="disabled"/></p>
                     <p><label for="form-snakes">Snakes:</label>
                     <select id="form-snakes">
                         <option value="none">None</option>
@@ -63,37 +126,100 @@
                     <button type="reset" id="reset-button">Reset</button></p>
                 </form>
             </div>
-            <div class="frame">
+            <div class="frame" id="frame2">
                 <section id="pane2" class="">
-                    <header id="header2" class="textual"></header>
-                    <img id="bg2" src="" />
-                    <pre id="code2"><code class="textual"></code></pre>
-                    <div class="bubble-top">
+                    <header id="header2" class="textual header"></header>
+                    <img id="bg2" src="" class="bg_image"/>
+                    <pre id="code2" class="pre_code"><code class="textual source_code"></code></pre>
+                    <div class="bubble-top left">
                         <p class="textual"></p>
                     </div>
                     <div class="bubble-top right">
                         <p class="textual"></p>
                     </div>
-                    <div class="bubble-bottom">
+                    <div class="bubble-bottom left">
                         <p class="textual"></p>
                     </div>
                     <div class="bubble-bottom right">
                         <p class="textual"></p>
                     </div>
                 </section>
-                <form>
+                <form id="form2">
                     <p><label for="form-heading">Heading:</label>
                     <input id="form-heading" type="checkbox"/></p>
                     <p><label for="form-background">Background:</label>
                     <select id="form-background">
                         <option value="none">None</option>
-                        <option value="custom">Custom</option>
+                        <option value="random">Random</option>
+                        <option value="custom">Custom (enter URL below)</option>
                         <option value="code">Example Code (edit in the pane)</option>
-                        {{#backgrounds}}
-                        <option value="{{.}}">{{.}}</option>
-                        {{/backgrounds}}
+                        <option value="arm1_chip.gif">ARM1 Chip</option>
+                        <option value="bauhaus.jpg">Bauhaus</option>
+                        <option value="bbc_basic.gif">BBC Basic</option>
+                        <option value="bbc_micro.jpg">BBC Micro</option>
+                        <option value="bbc_microbit_back.jpg">BBC micro:bit back</option>
+                        <option value="bbc_microbit_front.jpg">BBC micro:bit front</option>
+                        <option value="bbc_microbit_logo.jpg">BBC micro:bit logo</option>
+                        <option value="bbc_owl.jpg">BBC Owl</option>
+                        <option value="beach.jpg">Beach</option>
+                        <option value="belfast.jpg">Belfast</option>
+                        <option value="bluebells.jpg">Bluebells</option>
+                        <option value="cardiff.jpg">Cardiff</option>
+                        <option value="circuit.jpg">Circuit</option>
+                        <option value="cloudy_lake.jpg">Cloudy Lake</option>
+                        <option value="colossus.jpg">Colossus</option>
+                        <option value="computer_class.jpg">Computer Class</option>
+                        <option value="country_lane.jpg">Country Lane</option>
+                        <option value="death_star.jpg">Death Star</option>
+                        <option value="doradus.jpg">Doradus</option>
+                        <option value="dunes.jpg">Dunes</option>
+                        <option value="edinburgh.jpg">Edinburgh</option>
+                        <option value="field.jpg">Field</option>
+                        <option value="fish.jpg">Fish</option>
+                        <option value="forest_lake.jpg">Forest Lake</option>
+                        <option value="forest_stream.jpg">Forest Stream</option>
+                        <option value="guido.jpg">Guido van Rossum</option>
+                        <option value="london.jpg">London</option>
+                        <option value="mars.jpg">Mars</option>
+                        <option value="monument_valley.jpg">Monument Valley</option>
+                        <option value="moon.jpg">Moon</option>
+                        <option value="mountain_river.jpg">Mountain River</option>
+                        <option value="office.jpg">Office</option>
+                        <option value="old_computer.jpg">Old Computer</option>
+                        <option value="pattern01.jpg">Pattern 01</option>
+                        <option value="pattern02.jpg">Pattern 02</option>
+                        <option value="pattern03.jpg">Pattern 03</option>
+                        <option value="pattern04.jpg">Pattern 04</option>
+                        <option value="pattern05.jpg">Pattern 05</option>
+                        <option value="pattern06.jpg">Pattern 06</option>
+                        <option value="pattern07.jpg">Pattern 07</option>
+                        <option value="pattern08.jpg">Pattern 08</option>
+                        <option value="pattern09.jpg">Pattern 09</option>
+                        <option value="pattern10.jpg">Pattern 10</option>
+                        <option value="pattern11.jpg">Pattern 11</option>
+                        <option value="pattern12.jpg">Pattern 12</option>
+                        <option value="pattern13.jpg">Pattern 13</option>
+                        <option value="pattern14.jpg">Pattern 14</option>
+                        <option value="pattern15.jpg">Pattern 15</option>
+                        <option value="pattern16.jpg">Pattern 16</option>
+                        <option value="pattern17.jpg">Pattern 17</option>
+                        <option value="pattern18.jpg">Pattern 18</option>
+                        <option value="pattern19.jpg">Pattern 19</option>
+                        <option value="pattern20.jpg">Pattern 20</option>
+                        <option value="pattern21.jpg">Pattern 21</option>
+                        <option value="phosphor_sea.jpg">Phosphor Sea</option>
+                        <option value="pong.jpg">Pong</option>
+                        <option value="python_powered.jpg">Python Powered</option>
+                        <option value="raspberry_pi.jpg">Raspberry Pi</option>
+                        <option value="seaside.jpg">Seaside</option>
+                        <option value="servers.jpg">Servers</option>
+                        <option value="skulls.jpg">Skulls</option>
+                        <option value="snow.jpg">Snow</option>
+                        <option value="solar_system.jpg">Solar System</option>
+                        <option value="sunset.jpg">Sunset</option>
+                        <option value="winter_sun.jpg">Winter Sun</option>
                     </select></p>
-                    <p><input id="form-image-url" type="text" class="custom-image"/></p>
+                    <p><input id="form-image-url" type="text" class="custom-image" disabled="disabled"/></p>
                     <p><label for="form-snakes">Snakes:</label>
                     <select id="form-snakes">
                         <option value="none">None</option>
@@ -110,37 +236,100 @@
                 </form>
             </div>
 
-            <div class="frame">
+            <div class="frame" id="frame3">
                 <section id="pane3" class="">
-                    <header id="header3" class="textual"></header>
-                    <img id="bg3" src="" />
-                    <pre id="code3"><code class="textual"></code></pre>
-                    <div class="bubble-top">
+                    <header id="header3" class="textual header"></header>
+                    <img id="bg3" src="" class="bg_image"/>
+                    <pre id="code3" class="pre_code"><code class="textual source_code"></code></pre>
+                    <div class="bubble-top left">
                         <p class="textual"></p>
                     </div>
                     <div class="bubble-top right">
                         <p class="textual"></p>
                     </div>
-                    <div class="bubble-bottom">
+                    <div class="bubble-bottom left">
                         <p class="textual"></p>
                     </div>
                     <div class="bubble-bottom right">
                         <p class="textual"></p>
                     </div>
                 </section>
-                <form>
+                <form id="form3">
                     <p><label for="form-heading">Heading:</label>
                     <input id="form-heading" type="checkbox"/></p>
                     <p><label for="form-background">Background:</label>
                     <select id="form-background">
                         <option value="none">None</option>
-                        <option value="custom">Custom</option>
+                        <option value="random">Random</option>
+                        <option value="custom">Custom (enter URL below)</option>
                         <option value="code">Example Code (edit in the pane)</option>
-                        {{#backgrounds}}
-                        <option value="{{.}}">{{.}}</option>
-                        {{/backgrounds}}
+                        <option value="arm1_chip.gif">ARM1 Chip</option>
+                        <option value="bauhaus.jpg">Bauhaus</option>
+                        <option value="bbc_basic.gif">BBC Basic</option>
+                        <option value="bbc_micro.jpg">BBC Micro</option>
+                        <option value="bbc_microbit_back.jpg">BBC micro:bit back</option>
+                        <option value="bbc_microbit_front.jpg">BBC micro:bit front</option>
+                        <option value="bbc_microbit_logo.jpg">BBC micro:bit logo</option>
+                        <option value="bbc_owl.jpg">BBC Owl</option>
+                        <option value="beach.jpg">Beach</option>
+                        <option value="belfast.jpg">Belfast</option>
+                        <option value="bluebells.jpg">Bluebells</option>
+                        <option value="cardiff.jpg">Cardiff</option>
+                        <option value="circuit.jpg">Circuit</option>
+                        <option value="cloudy_lake.jpg">Cloudy Lake</option>
+                        <option value="colossus.jpg">Colossus</option>
+                        <option value="computer_class.jpg">Computer Class</option>
+                        <option value="country_lane.jpg">Country Lane</option>
+                        <option value="death_star.jpg">Death Star</option>
+                        <option value="doradus.jpg">Doradus</option>
+                        <option value="dunes.jpg">Dunes</option>
+                        <option value="edinburgh.jpg">Edinburgh</option>
+                        <option value="field.jpg">Field</option>
+                        <option value="fish.jpg">Fish</option>
+                        <option value="forest_lake.jpg">Forest Lake</option>
+                        <option value="forest_stream.jpg">Forest Stream</option>
+                        <option value="guido.jpg">Guido van Rossum</option>
+                        <option value="london.jpg">London</option>
+                        <option value="mars.jpg">Mars</option>
+                        <option value="monument_valley.jpg">Monument Valley</option>
+                        <option value="moon.jpg">Moon</option>
+                        <option value="mountain_river.jpg">Mountain River</option>
+                        <option value="office.jpg">Office</option>
+                        <option value="old_computer.jpg">Old Computer</option>
+                        <option value="pattern01.jpg">Pattern 01</option>
+                        <option value="pattern02.jpg">Pattern 02</option>
+                        <option value="pattern03.jpg">Pattern 03</option>
+                        <option value="pattern04.jpg">Pattern 04</option>
+                        <option value="pattern05.jpg">Pattern 05</option>
+                        <option value="pattern06.jpg">Pattern 06</option>
+                        <option value="pattern07.jpg">Pattern 07</option>
+                        <option value="pattern08.jpg">Pattern 08</option>
+                        <option value="pattern09.jpg">Pattern 09</option>
+                        <option value="pattern10.jpg">Pattern 10</option>
+                        <option value="pattern11.jpg">Pattern 11</option>
+                        <option value="pattern12.jpg">Pattern 12</option>
+                        <option value="pattern13.jpg">Pattern 13</option>
+                        <option value="pattern14.jpg">Pattern 14</option>
+                        <option value="pattern15.jpg">Pattern 15</option>
+                        <option value="pattern16.jpg">Pattern 16</option>
+                        <option value="pattern17.jpg">Pattern 17</option>
+                        <option value="pattern18.jpg">Pattern 18</option>
+                        <option value="pattern19.jpg">Pattern 19</option>
+                        <option value="pattern20.jpg">Pattern 20</option>
+                        <option value="pattern21.jpg">Pattern 21</option>
+                        <option value="phosphor_sea.jpg">Phosphor Sea</option>
+                        <option value="pong.jpg">Pong</option>
+                        <option value="python_powered.jpg">Python Powered</option>
+                        <option value="raspberry_pi.jpg">Raspberry Pi</option>
+                        <option value="seaside.jpg">Seaside</option>
+                        <option value="servers.jpg">Servers</option>
+                        <option value="skulls.jpg">Skulls</option>
+                        <option value="snow.jpg">Snow</option>
+                        <option value="solar_system.jpg">Solar System</option>
+                        <option value="sunset.jpg">Sunset</option>
+                        <option value="winter_sun.jpg">Winter Sun</option>
                     </select></p>
-                    <p><input id="form-image-url" type="text" class="custom-image"/></p>
+                    <p><input id="form-image-url" type="text" class="custom-image" disabled="disabled"/></p>
                     <p><label for="form-snakes">Snakes:</label>
                     <select id="form-snakes">
                         <option value="none">None</option>
@@ -160,7 +349,6 @@
         <footer class="smallprint">
             <p>Generated by Python Comics.
             <a href="http://pycomic.github.io/" id="home-link">MAKE YOUR OWN</a>
-            <a href="" id="direct-link">Direct Link</a>
             </p>
         </footer>
     </main>

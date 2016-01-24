@@ -195,7 +195,7 @@ function setup_editor() {
         crocodile('pin-gnd', false);
     });
     // Update the target when the direct link is clicked.
-    $('#direct-link').click(function(e) {
+    $('#direct-button').click(function(e) {
         set_qs(QS);
     });
 }
