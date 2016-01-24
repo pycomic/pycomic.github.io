@@ -402,7 +402,7 @@ function get_state_from_dom() {
     if($('#bg3').is(":visible")) {
         result.bg3 = $('#bg3').attr('src');
     } else if ($('#code3').is(':visible')) {
-        result.code3 = $('#code1').text();
+        result.code3 = $('#code3').text();
     }
     var s1 = form1.find('#form-snakes').find("option:selected").attr('value');
     if(s1!=='none') {
