@@ -380,6 +380,15 @@ function get_state_from_dom() {
     var pane3 = $('#pane3');
     result.title = $('#title').text();
     result.author = $('#author').text();
+    if(pane1.find('.header').is(':visible')) {
+        result.h1 = pane1.find('.header').text();
+    }
+    if(pane2.find('.header').is(':visible')) {
+        result.h2 = pane2.find('.header').text();
+    }
+    if(pane3.find('.header').is(':visible')) {
+        result.h3 = pane3.find('.header').text();
+    }
     if($('#bg1').is(":visible")) {
         result.bg1 = $('#bg1').attr('src');
     } else if ($('#code1').is(':visible')) {
