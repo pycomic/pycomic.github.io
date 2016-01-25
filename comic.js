@@ -392,17 +392,17 @@ function get_state_from_dom() {
     if($('#bg1').is(":visible")) {
         result.bg1 = $('#bg1').attr('src');
     } else if ($('#code1').is(':visible')) {
-        result.code1 = $('#code1').text();
+        result.code1 = $('#code1 code')[0].innerHTML.replace(new RegExp('<br>', 'g'), '\n');
     }
     if($('#bg2').is(":visible")) {
         result.bg2 = $('#bg2').attr('src');
     } else if ($('#code2').is(':visible')) {
-        result.code2 = $('#code2').text();
+        result.code2 = $('#code2 code')[0].innerHTML.replace(new RegExp('<br>', 'g'), '\n');
     }
     if($('#bg3').is(":visible")) {
         result.bg3 = $('#bg3').attr('src');
     } else if ($('#code3').is(':visible')) {
-        result.code3 = $('#code3').text();
+        result.code3 = $('#code3 code')[0].innerHTML.replace(new RegExp('<br>', 'g'), '\n');
     }
     var s1 = form1.find('#form-snakes').find("option:selected").attr('value');
     if(s1!=='none') {
