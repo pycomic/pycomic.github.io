@@ -3,6 +3,7 @@
     <head>
         <title>Python Comic</title>
         <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="introjs.min.css"/>
         <script src="jquery-2.1.4.min.js"></script>
         <script src="qs-tools.js"></script>
         <script src="comic.js"></script>
@@ -10,14 +11,15 @@
     <body>
     <main class="comic">
         <header class="title">
-            <h1 id="title">Python Comic</h1>
+            <h1 id="title" data-step="1" data-intro="Click on the title to edit.">Python Comic</h1>
             <h2>by</h2>
-            <h2 id="author">Anonymous Author</h2>
-            <span id="editor-help"><button id="direct-button">Get Direct Link</button> <a href="#" id="direct-link"></a></span>
+            <h2 id="author" data-step="2" data-intro="Same goes for the author name!">Anonymous Author</h2>
+            <span id="editor-help"><button onclick="javascript:introJs().start();">Help</button><button id="direct-button" data-step="9"
+            data-intro="Finally, click here to get the URL of your comic. Share it!">Get Direct Link</button> <a href="#" id="direct-link"></a></span>
         </header>
 
         <article class="strip">
-            <div class="frame" id="frame1">
+            <div class="frame" id="frame1" data-step="3" data-intro="Each comic frame is controlled by the form underneath it." data-position="right">
                 <section id="pane1" class="">
                     <header id="header1" class="textual header"></header>
                     <img id="bg1" src="" class="bg_image"/>
@@ -36,10 +38,15 @@
                     </div>
                 </section>
                 <form id="form1">
-                    <p><label for="form-heading">Heading:</label>
+                    <p data-step="4"
+                    data-intro="Toggle a frame header, then click it to edit."
+                    data-position="top">
+                    <label for="form-heading">Heading:</label>
                     <input id="form-heading" type="checkbox"/></p>
                     <p><label for="form-background">Background:</label>
-                    <select id="form-background">
+                    <select id="form-background" data-step="5"
+                    data-intro="Select a pre-defined background. Alternatively, choose to use a custom image (select 'Custom') or even add example code (select 'Example Code' then click the frame to edit your code)."
+                    data-position="top">
                         <option value="none">None</option>
                         <option value="random">Random</option>
                         <option value="custom">Custom (enter URL below)</option>
@@ -110,20 +117,24 @@
                         <option value="sunset.jpg">Sunset</option>
                         <option value="winter_sun.jpg">Winter Sun</option>
                     </select></p>
-                    <p><input id="form-image-url" type="text" class="custom-image" disabled="disabled"/></p>
+                    <p><input id="form-image-url" type="text" class="custom-image" disabled="disabled" data-step="6" data-intro="Add the URL to your custom image here." data-position="top"/></p>
                     <p><label for="form-snakes">Snakes:</label>
-                    <select id="form-snakes">
+                    <select id="form-snakes" data-step="7"
+                    data-intro="The comic features two characters, the yellow and blue Python snakes. Use this to control who gets displayed." data-position="top">
                         <option value="none">None</option>
                         <option value="both">Both</option>
                         <option value="yellow">Yellow</option>
                         <option value="blue">Blue</option>
                     </select></p>
-                    <p><label for="form-tl">Speech bubbles:</label><br/>
+                    <p data-step="8"
+                      data-intro="Toggle speech bubbles, then click to edit."
+                      data-position="top">
+                    <label for="form-tl">Speech bubbles:</label><br/>
                     <input type="checkbox" value="lt" id="form-lt">Top Left</input>
                     <input type="checkbox" value="rt" id="form-rt">Top Right</input><br/>
                     <input type="checkbox" value="lb" id="form-lb">Bottom Left</input>
                     <input type="checkbox" value="rb" id="form-rb">Bottom Right</input></p>
-                    <button type="reset" id="reset-button">Reset</button></p>
+                    <p><button type="reset" id="reset-button">Reset</button></p>
                 </form>
             </div>
             <div class="frame" id="frame2">
@@ -232,7 +243,7 @@
                     <input type="checkbox" value="rt" id="form-rt">Top Right</input><br/>
                     <input type="checkbox" value="lb" id="form-lb">Bottom Left</input>
                     <input type="checkbox" value="rb" id="form-rb">Bottom Right</input></p>
-                    <button type="reset" id="reset-button">Reset</button></p>
+                    <p><button type="reset" id="reset-button">Reset</button></p>
                 </form>
             </div>
 
@@ -342,7 +353,7 @@
                     <input type="checkbox" value="rt" id="form-rt">Top Right</input><br/>
                     <input type="checkbox" value="lb" id="form-lb">Bottom Left</input>
                     <input type="checkbox" value="rb" id="form-rb">Bottom Right</input></p>
-                    <button type="reset" id="reset-button">Reset</button></p>
+                    <p><button type="reset" id="reset-button">Reset</button></p>
                 </form>
             </div>
         </article>
@@ -352,5 +363,6 @@
             </p>
         </footer>
     </main>
+    <script src="intro.min.js"></script>
     </body>
 </html>
