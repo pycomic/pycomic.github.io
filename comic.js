@@ -19,6 +19,7 @@ function update_scene(context) {
     if(context.bg1) {
         $('#bg1').show();
         $('#code1').hide();
+        $('#if1').hide();
         if(context.bg1 === 'random') {
             $('#bg1').attr('src', 'http://lorempixel.com/240/240/?v=1');
         } else {
@@ -30,6 +31,7 @@ function update_scene(context) {
     if(context.bg2) {
         $('#bg2').show();
         $('#code2').hide();
+        $('#if2').hide();
         if(context.bg2 === 'random') {
             $('#bg2').attr('src', 'http://lorempixel.com/240/240/?v=2');
         } else {
@@ -41,6 +43,7 @@ function update_scene(context) {
     if(context.bg3) {
         $('#bg3').show();
         $('#code3').hide();
+        $('#if3').hide();
         if(context.bg3 === 'random') {
             $('#bg3').attr('src', 'http://lorempixel.com/240/240/?v=3');
         } else {
@@ -52,6 +55,7 @@ function update_scene(context) {
     // Set the code examples.
     if(context.code1) {
         $('#bg1').hide();
+        $('#if1').hide();
         $('#code1').show();
         $('#code1 code').text(context.code1);
     } else {
@@ -59,6 +63,7 @@ function update_scene(context) {
     }
     if(context.code2) {
         $('#bg2').hide();
+        $('#if2').hide();
         $('#code2').show();
         $('#code2 code').text(context.code2);
     } else {
@@ -66,10 +71,36 @@ function update_scene(context) {
     }
     if(context.code3) {
         $('#bg3').hide();
+        $('#if3').hide();
         $('#code3').show();
         $('#code3 code').text(context.code3);
     } else {
         $('#code3').hide();
+    }
+    // Set the micro:bit sims
+    if(context.mb1) {
+        $('#bg1').hide();
+        $('#code1').hide();
+        $('#if1').show();
+        $('#if1').attr('src', context.mb1);
+    } else {
+        $('#if1').hide();
+    }
+    if(context.mb2) {
+        $('#bg2').hide();
+        $('#code2').hide();
+        $('#if2').show();
+        $('#if2').attr('src', context.mb2);
+    } else {
+        $('#if2').hide();
+    }
+    if(context.mb3) {
+        $('#bg3').hide();
+        $('#code3').hide();
+        $('#if3').show();
+        $('#if3').attr('src', context.mb3);
+    } else {
+        $('#if3').hide();
     }
     // Set the snakes.
     $('#pane1').removeClass();
@@ -229,9 +260,13 @@ function setup_editor() {
         var form_background = form.find('#form-background');
         var pane_background = pane.find('.bg_image');
         var pane_code = pane.find('.pre_code');
+        var pane_iframe = pane.find('iframe');
         var form_image_url = form.find('#form-image-url');
+        var mb_omatic = form.find('.mb-link');
         pane_code.hide();
         pane_background.hide();
+        pane_iframe.hide();
+        mb_omatic.hide();
         form_header.change(function(e) {
             if(form_header[0].checked) {
                 pane_header.show();
@@ -245,9 +280,11 @@ function setup_editor() {
         form.find('#form-background').change(function(e) {
             var bg = $(this).find("option:selected").attr('value');
             form.find('#form-image-url').prop('disabled', true);
+            mb_omatic.hide();
             if(bg==='custom') {
                 pane_background.show();
                 pane_code.hide();
+                pane_iframe.hide();
                 var custom_url = form.find('#form-image-url');
                 custom_url.prop('disabled', false);
                 if(custom_url.val()) {
@@ -255,11 +292,25 @@ function setup_editor() {
                     pane_background.attr('src', url);
                 }
                 custom_url.focus();
+            } else if(bg==='microbit') {
+                pane_background.hide();
+                pane_code.hide();
+                pane_iframe.show();
+                mb_omatic.show();
+                var custom_url = form.find('#form-image-url');
+                custom_url.prop('disabled', false);
+                if(custom_url.val()) {
+                    var url = custom_url.val();
+                    pane_iframe.attr('src', url);
+                }
+                custom_url.focus();
             } else if(bg==='none') {
                 pane_background.hide();
                 pane_code.hide();
+                pane_iframe.hide();
             } else if(bg==='code') {
                 pane_background.hide();
+                pane_iframe.hide();
                 pane_code.show();
                 var code_holder = pane.find('.source_code');
                 if(!code_holder.text()) {
@@ -278,7 +329,14 @@ function setup_editor() {
         });
         form.find('.custom-image').on('input', function(e) {
             var url = $(this).val();
-            pane_background.attr('src', url);
+            var bg = form.find('#form-background').find("option:selected").attr('value');
+            if(bg==='custom') {
+                pane_background.attr('src', url);
+                pane_iframe.attr('src', '');
+            } else {
+                pane_iframe.attr('src', url);
+                pane_background.attr('src', '');
+            }
         });
         form.find('#form-snakes').change(function(e) {
             var snakes = $(this).find("option:selected").attr('value');
@@ -393,16 +451,22 @@ function get_state_from_dom() {
         result.bg1 = $('#bg1').attr('src');
     } else if ($('#code1').is(':visible')) {
         result.code1 = $('#code1 code')[0].innerHTML.replace(new RegExp('<br>', 'g'), '\n');
+    } else if ($('#if1').is(':visible')) {
+        result.mb1 = $('#if1').attr('src');
     }
     if($('#bg2').is(":visible")) {
         result.bg2 = $('#bg2').attr('src');
     } else if ($('#code2').is(':visible')) {
         result.code2 = $('#code2 code')[0].innerHTML.replace(new RegExp('<br>', 'g'), '\n');
+    } else if ($('#if2').is(':visible')) {
+        result.mb2 = $('#if2').attr('src');
     }
     if($('#bg3').is(":visible")) {
         result.bg3 = $('#bg3').attr('src');
     } else if ($('#code3').is(':visible')) {
         result.code3 = $('#code3 code')[0].innerHTML.replace(new RegExp('<br>', 'g'), '\n');
+    } else if ($('#if3').is(':visible')) {
+        result.mb3 = $('#if3').attr('src');
     }
     var s1 = form1.find('#form-snakes').find("option:selected").attr('value');
     if(s1!=='none') {

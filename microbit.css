@@ -40,6 +40,17 @@ form label {
   }
 }
 
+.microbit-embed {
+  display: block;
+  position: absolute;
+  width: 300px;
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
 .strawberry {fill: #ff0000;}
 .orange {fill: #ff8000;}
 .banana {fill: #ffff00;}
@@ -95,7 +106,7 @@ form label {
   left: 0.36em;
   top: 3em;
   width: 0.3em;
-  height: 10em;
+  height: 6em;
   background: red;
   z-index: 1;
 }
@@ -103,7 +114,7 @@ form label {
   top: 2.5em;
   left: -1em;
   width: 3em;
-  height: 5em;
+  height: 4em;
   border-radius: 3em 3em 5em 5em;
   background: red;
   z-index: 2;
@@ -128,6 +139,67 @@ form label {
 }
 .microbit-svg .crocodile.pin-gnd {
   left: 22.4em;
+}
+
+.microbit-embed .crocodile {
+  display: block;
+  width: 1em;
+  height: 2.1em;
+  background: #ccc;
+  position: absolute;
+  border-radius: 1em 1em 0 0 ;
+  z-index: 2;
+  box-shadow: 0 -0.05em 0.1em black;
+}
+.microbit-embed .crocodile:before,
+.microbit-embed .crocodile:after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 1em;
+  height: 1em;
+  background: #ccc;
+  margin-top: -0.5em;
+  border-radius: 1em;
+  z-index: 3;
+}
+.microbit-embed .crocodile:before {
+  left: 0.36em;
+  top: 3em;
+  width: 0.3em;
+  height: 2em;
+  background: red;
+  z-index: 1;
+}
+.microbit-embed .crocodile:after {
+  top: 2.5em;
+  left: -0.5em;
+  width: 2em;
+  height: 2em;
+  border-radius: 3em 3em 5em 5em;
+  background: red;
+  z-index: 2;
+}
+.microbit-embed .crocodile.pin-0,
+.microbit-embed .crocodile.pin-1,
+.microbit-embed .crocodile.pin-2,
+.microbit-embed .crocodile.pin-3v,
+.microbit-embed .crocodile.pin-gnd {
+  left: 1.1em;
+  bottom: -1em;
+  display: none;
+}
+.microbit-embed .crocodile.pin-1 {
+  left: 4.9em;
+}
+.microbit-embed .crocodile.pin-2 {
+  left: 8.9em;
+}
+.microbit-embed .crocodile.pin-3v {
+  left: 13em;
+}
+.microbit-embed .crocodile.pin-gnd {
+  left: 16.8em;
 }
 
 #button-b:active, #button-a:active {

@@ -50,7 +50,7 @@ function show(image, greyscale) {
 // Update the "flavour" (i.e. colour scheme) of the micro:bit to some
 // pre-defined named flavour (see the style.css file).
 function set_flavour(flavour) {
-    $('.microbit-svg .flavour').attr('class', 'flavour ' + flavour)
+    $('#microbit-svg .flavour').attr('class', 'flavour ' + flavour)
     QS['flavour'] = flavour;
 }
 
@@ -118,6 +118,8 @@ function scroll_text(text, interval, repeat) {
 
 // Add various UI controls for updating the output of the device.
 function setup_editor() {
+    $('#microbit-svg').removeClass();
+    $('#microbit-svg').addClass('microbit-svg');
     // Show the controls.
     $('.controls').show();
     // Ensure the form never submits.
@@ -212,6 +214,7 @@ function setup_from_url() {
     var image = get_qs_value("image");
     var message = get_qs_value("scroll");
     var repeat = get_qs_value("repeat");
+    var embed = get_qs_value("embed");
     if(flavour) {
         set_flavour(flavour);
     }
