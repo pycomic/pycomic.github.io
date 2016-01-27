@@ -253,10 +253,10 @@ function setup_editor() {
     // Set text fields contenteditable.
     $('#title').attr('contenteditable', 'true');
     $('#author').attr('contenteditable', 'true');
-    $('#title').change(function() {
+    $('#title').focus(function() {
         clear_on_change();
     });
-    $('#author').change(function() {
+    $('#author').focus(function() {
         clear_on_change()
     });
     $('.textual').attr('contenteditable', 'true');
