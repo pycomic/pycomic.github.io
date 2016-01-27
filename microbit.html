@@ -3,6 +3,7 @@
     <head>
         <title>Here's a BBC micro:bit-o-matic!</title>
         <link rel="stylesheet" href="microbit.css"/>
+        <link rel="stylesheet" href="introjs.min.css"/>
         <script src="jquery-2.1.4.min.js"></script>
         <script src="qs-tools.js"></script>
         <script src="images.js"></script>
@@ -10,10 +11,11 @@
         <script src="microbit.js"></script>
     </head>
     <body>
-    <div class="controls">
+    <div class="controls" data-step="1" data-intro="Use the controls in this form to create sample output from the micro:bit simulator.">
         <form id="control-form">
         <label for="flavour">Flavour</label>
-        <select id="flavour" name="flavour">
+        <select id="flavour" name="flavour" data-step="2"
+        data-intro="Select the colour scheme for your micro:bit.">
             <option value="banana">Banana</option>
             <option value="strawberry">Strawberry</option>
             <option value="orange">Orange</option>
@@ -29,22 +31,30 @@
             <option value="truffle">Truffle</option>
             <option value="chocolate">Chocolate</option>
         </select>
+        <span data-step="3" data-intro="Toggle crocodile clips on the five main I/O pins.">
         <label for="pin-0">Crocodile Clips</label>
         <input type="checkbox" name="pin-0" id='p0-state'>0</input>
         <input type="checkbox" name="pin-1" id='p1-state'>1</input>
         <input type="checkbox" name="pin-2" id='p2-state'>2</input>
         <input type="checkbox" name="pin-3v" id='3v-state'>3V</input>
         <input type="checkbox" name="pin-gnd" id='gnd-state'>GND</input>
+        </span>
         <label for="images">Images</label>
-        <select id="images" name="images"></select>
+        <select id="images" name="images" data-step="4"
+        data-intro="Show a built-in image on the LED display."></select>
+        <span data-step="5"
+        data-intro="Write text to scroll across the display, toggle if it should keep repeating and click scroll for it to take effect.">
         <label for="scroll">Scroll Message</label>
         <input type="text" id="scroll" name="scroll"/>
         <label for="repeat">Repeat</label>
         <input type="checkbox" id="repeat" name="repeat"/>
-        <button id="start_scroll">Scroll</button><br/>
-        <button type="reset" id="reset">Reset</button>
+        <button id="start_scroll">Scroll</button></span><br/>
+        <button onclick="javascript:introJs().start();">Help</button>
+        <button type="reset" id="reset" data-step="6"
+        data-intro="Reset the form and the state of the micro:bit simulator.">Reset</button>
         </form>
-        <span id="editor-help"><button id="direct-button">Get Direct Link</button> <a href="#" id="direct-link"></a></span>
+        <span id="editor-help" data-step="7"
+        data-intro="Click here to generate a URL to embed inside your PyComic strip or share with others on the internet."><button id="direct-button">Get Direct Link</button> <a href="#" id="direct-link"></a></span>
     </div>
 <div class="microbit-embed" id="microbit-svg">
 
@@ -224,5 +234,6 @@
   <div class="crocodile pin-gnd"></div>
   
 </div>
+    <script src="intro.min.js"></script>
     </body>
 </html>

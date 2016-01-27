@@ -3,6 +3,10 @@ form label {
     margin-left: 8px;
 }
 
+.controls {
+    margin: 16px;
+}
+
 .controls form {
     display: inline;
 }
