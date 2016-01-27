@@ -237,6 +237,14 @@ function check_item(item, context, field_name) {
     }
 }
 
+// If the state changes then call this function to remove the tweet button and
+// direct link that will need re-building.
+function clear_on_change() {
+    $('#direct-link').attr('href', '#');
+    $('#direct-link').text('');
+    $('#twitter-button').html('');
+}
+
 // Add various UI controls for updating the output of the device.
 function setup_editor() {
     $('#editor-help').show();
@@ -245,6 +253,12 @@ function setup_editor() {
     // Set text fields contenteditable.
     $('#title').attr('contenteditable', 'true');
     $('#author').attr('contenteditable', 'true');
+    $('#title').change(function() {
+        clear_on_change();
+    });
+    $('#author').change(function() {
+        clear_on_change()
+    });
     $('.textual').attr('contenteditable', 'true');
     // Connect the configuration forms to the panels.
     var form1 = $('#form1');
@@ -253,6 +267,15 @@ function setup_editor() {
     var pane1 = $('#pane1');
     var pane2 = $('#pane2');
     var pane3 = $('#pane3');
+    form1.change(function() {
+        clear_on_change();
+    });
+    form2.change(function() {
+        clear_on_change();
+    });
+    form3.change(function() {
+        clear_on_change();
+    });
     // A function to connect a form to a panel.
     function connect(form, pane) {
         var form_header = form.find('#form-heading');
