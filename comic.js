@@ -526,6 +526,7 @@ $(document).ready(function() {
     // device as specified therein.
     if(querystring) {
         setup_from_url();
+        set_qs(QS);
     } else {
         // Otherwise, show some UI to allow people to edit their own settings.
         setup_editor();

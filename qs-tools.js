@@ -45,5 +45,7 @@ function set_qs(settings) {
         console.log(data);
         $('#direct-link').attr('href', data.id);
         $('#direct-link').text(data.id);
+        $('#twitter-button').html('<a href="https://twitter.com/share" class="twitter-share-button" data-url="' + data.id +'" data-text="Check out this cool Python programming comic..! :-)" data-via="ntoll" data-hashtags="pycomic" data-dnt="true">Tweet</a>');
+        twttr.widgets.load();
     });
 }
