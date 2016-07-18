@@ -37,7 +37,7 @@ form label {
   margin-top: -150px;
   width: 400px;
   height: 300px;
-  svg {
+  svg: {
     display: block;
     width: 100%;
     height: auto;
@@ -48,7 +48,7 @@ form label {
   display: block;
   position: absolute;
   width: 300px;
-  svg {
+  svg: {
     display: block;
     width: 100%;
     height: auto;
