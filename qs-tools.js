@@ -34,18 +34,27 @@ function set_qs(settings) {
     var old_url = window.location.href.split('?');
     var new_url = old_url[0] + '?' + qs_array.join('&');
     // shortener API
-    var url = "https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyB2_Cwh5lKUX4a681ZERd3FAt8ijdwbukk";
-    $.ajax(url, {
-        type: "POST",
-        contentType: 'application/json',
-        data: JSON.stringify({
-            longUrl: new_url
-        })
+    var linkRequest = {
+      destination: new_url,
+      domain: { fullName: "rebrand.ly" }
+    }
+
+    var requestHeaders = {
+      "Content-Type": "application/json",
+      "apikey": "389c7869b56b4084a9749a2b3e1eba03"
+    }
+
+    $.ajax({
+      url: "https://api.rebrandly.com/v1/links",
+      type: "post",
+      data: JSON.stringify(linkRequest),
+      headers: requestHeaders,
+      dataType: "json",
     }).done(function( data ) {
-        console.log(data);
-        $('#direct-link').attr('href', data.id);
-        $('#direct-link').text(data.id);
-        $('#twitter-button').html('<a href="https://twitter.com/share" class="twitter-share-button" data-url="' + data.id +'" data-text="Check out this cool Python programming comic..! :-)" data-via="ntoll" data-hashtags="pycomic" data-dnt="true">Tweet</a>');
-        twttr.widgets.load();
+            console.log(data);
+            $('#direct-link').attr('href', "https://" + data.shortUrl);
+            $('#direct-link').text(data.shortUrl);
+            $('#twitter-button').html('<a href="https://twitter.com/share" class="twitter-share-button" data-url="' + data.shortUrl +'" data-text="Check out this cool Python programming comic..! :-)" data-via="ntoll" data-hashtags="pycomic" data-dnt="true">Tweet</a>');
+            twttr.widgets.load();
     });
 }
