@@ -54,7 +54,7 @@ function set_qs(settings) {
             console.log(data);
             $('#direct-link').attr('href', "https://" + data.shortUrl);
             $('#direct-link').text(data.shortUrl);
-            $('#twitter-button').html('<a href="https://twitter.com/share" class="twitter-share-button" data-url="' + data.shortUrl +'" data-text="Check out this cool Python programming comic..! :-)" data-via="ntoll" data-hashtags="pycomic" data-dnt="true">Tweet</a>');
+            $('#twitter-button').html('<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Check out this Python comic..!" data-via="ntoll" data-hashtags="pycomic" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>');
             twttr.widgets.load();
     });
 }
