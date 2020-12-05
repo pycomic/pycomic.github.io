@@ -33,27 +33,14 @@ function set_qs(settings) {
     }
     var old_url = window.location.href.split('?');
     var new_url = old_url[0] + '?' + qs_array.join('&');
-    // shortener API
-    var linkRequest = {
-      destination: new_url,
-      domain: { fullName: "rebrand.ly" }
-    }
-
-    var requestHeaders = {
-      "Content-Type": "application/json",
-      "apikey": "389c7869b56b4084a9749a2b3e1eba03"
-    }
 
     $.ajax({
-      url: "https://api.rebrandly.com/v1/links",
-      type: "post",
-      data: JSON.stringify(linkRequest),
-      headers: requestHeaders,
-      dataType: "json",
+      url: "https://tinyurl.com/api-create.php?url=" + new_url,
+      type: "get",
     }).done(function( data ) {
             console.log(data);
-            $('#direct-link').attr('href', "https://" + data.shortUrl);
-            $('#direct-link').text(data.shortUrl);
+            $('#direct-link').attr('href', data);
+            $('#direct-link').text(data);
             $('#twitter-button').html('<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Check out this Python comic..!" data-via="ntoll" data-hashtags="pycomic" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>');
             twttr.widgets.load();
     });
